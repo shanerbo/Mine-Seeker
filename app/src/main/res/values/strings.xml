@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">MineSeeker</string>
+    <string name="welcome">Welcome to the Mine Seeker game</string>
+    <string name="Authors">By OttoHu \n Erbo Shen</string>
+    <string name="Enter">Enter Game</string>
+    <string name="Menu_title">Main Menu</string>
+    <string name="start">PLAY!</string>
+    <string name="options">Options</string>
+    <string name="help">Help</string>
 </resources>
