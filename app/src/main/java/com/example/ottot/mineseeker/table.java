@@ -5,28 +5,28 @@ package com.example.ottot.mineseeker;
  */
 
 public class table {
-    private int tableWidth;
-    private int tableHeight;
+    private int tableCols;
+    private int tableRows;
     private block[][] allBlocks;
-    private int[] mineOfRows;
-    private int[] mineOfCols;
+    private int[] mineOfEachRows;
+    private int[] mineOfEachCols;
 
-    //initializes the whole table
-    public table(int tableWidth,int tableHeight) {
-        this.tableWidth = tableWidth;
-        this.tableHeight = tableHeight;
-        allBlocks = new block[tableHeight][tableWidth];
-        mineOfCols = new int[tableWidth];
-        mineOfRows = new int[tableHeight];
+    //initialization functions
+    public table(int tableCols, int tableRows) {
+        this.tableCols = tableCols;
+        this.tableRows = tableRows;
+        allBlocks = new block[tableRows][tableCols];
+        mineOfEachCols = new int[tableRows];
+        mineOfEachRows = new int[tableCols];
         searchMines();
     }
 
     public void searchMines(){
-        for (int i = 0;i<tableHeight;i++){
-            for (int j = 0; j<tableWidth;j++){
+        for (int i = 0; i< tableRows; i++){
+            for (int j = 0; j< tableCols; j++){
                 if (allBlocks[i][j].getMine()==1){
-                    mineOfRows[i]++;
-                    mineOfCols[j]++;
+                    mineOfEachRows[i]++;
+                    mineOfEachCols[j]++;
                 }
             }
 
@@ -34,33 +34,33 @@ public class table {
     }
     //--------------------------------
 
+    //User interaction functions
     //called when user taps a block
     public int guessMine(int rowIndex, int colIndex){
         if (allBlocks[rowIndex][colIndex].getMine()==1){
-            mineOfRows[colIndex]--;
-            mineOfCols[rowIndex]--;
+            mineOfEachRows[colIndex]--;
+            mineOfEachCols[rowIndex]--;
             return 1;
         }
         else return 0;
     }
     //called to get the number on the block, which is the sum of mines in the row and column
     public int numOfMines(int rowIndex, int colIndex){
-        return mineOfCols[rowIndex] + mineOfRows[colIndex];
+        return mineOfEachCols[rowIndex] + mineOfEachRows[colIndex];
     }
-
+    //----------------------------------
 
     //getters & setters
-    public int getTableWidth() {
-        return tableWidth;
+    public int getTableCols() {
+        return tableCols;
     }
-
-    public int getTableHeight() {
-        return tableHeight;
+    public int getTableRows() {
+        return tableRows;
     }
-    public void setTableWidth(int tableWidth) {
-        this.tableHeight = tableWidth;
+    public void setTableCols(int tableCols) {
+        this.tableRows = tableCols;
     }
-    public void setTableHeight(int tableHeight) {
-        this.tableHeight = tableHeight;
+    public void setTableRows(int tableRows) {
+        this.tableRows = tableRows;
     }
 }
