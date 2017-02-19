@@ -22,6 +22,8 @@ public class table {
     }
 
     public void searchMines(){
+        mineOfEachRows = new int[tableCols];
+        mineOfEachCols = new int[tableRows];
         for (int i = 0; i< tableRows; i++){
             for (int j = 0; j< tableCols; j++){
                 if (allBlocks[i][j].getMine()==1){
@@ -50,6 +52,14 @@ public class table {
     }
     //----------------------------------
 
+
+    public void printTable(){
+        for (int i = 0;i<tableRows;i++){
+            for (int j = 0;j<tableCols;j++){
+                System.out.print(allBlocks[i][j].getMine());
+            }
+        }
+    }
     //getters & setters
     public int getTableCols() {
         return tableCols;

@@ -11,7 +11,7 @@ public class tableTest {
     @Test
     public void searchMines() throws Exception {
         table test = new table(5,10);
-
+        //test.printTable();
     }
 
     @Test

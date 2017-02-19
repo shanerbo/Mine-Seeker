@@ -19,7 +19,7 @@ public class UserMenu extends AppCompatActivity {
         //initialize table data with default values
         game_data = new table(default_row,default_col);
 
-        //activation for the three buttons
+        //activation for the three buttons on main menu page
         final Button startGame = (Button)findViewById(R.id.Game_start);
         startGame.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -29,7 +29,7 @@ public class UserMenu extends AppCompatActivity {
             }
         });
 
-        Button options = (Button)findViewById(R.id.options_btn);
+        final Button options = (Button)findViewById(R.id.options_btn);
         options.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -38,7 +38,7 @@ public class UserMenu extends AppCompatActivity {
             }
         });
 
-        Button help = (Button)findViewById(R.id.return_btn);
+        final Button help = (Button)findViewById(R.id.return_btn);
         help.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -56,6 +56,7 @@ public class UserMenu extends AppCompatActivity {
     public void reSize(int newRow, int newCol){
         game_data = new table(newRow, newCol);
     }
+
     public static Intent makeIntent(Context context){
         return new Intent(context, UserMenu.class);
     }
