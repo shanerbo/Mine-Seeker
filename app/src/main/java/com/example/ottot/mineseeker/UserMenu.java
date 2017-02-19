@@ -8,7 +8,7 @@ import android.view.View;
 import android.widget.Button;
 
 public class UserMenu extends AppCompatActivity {
-    private table game_data;
+    private table game_data; //always rowIndex(y) first, colIndex(x) second
     private int default_row = 6;
     private int default_col = 10;
     @Override
@@ -19,7 +19,7 @@ public class UserMenu extends AppCompatActivity {
         //initialize table data with default values
         game_data = new table(default_row,default_col);
 
-        //activation for the three buttons on main menu page
+//        //activation for the three buttons on main menu page
         final Button startGame = (Button)findViewById(R.id.Game_start);
         startGame.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -38,7 +38,7 @@ public class UserMenu extends AppCompatActivity {
             }
         });
 
-        final Button help = (Button)findViewById(R.id.return_btn);
+        final Button help = (Button)findViewById(R.id.help_btn);
         help.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
