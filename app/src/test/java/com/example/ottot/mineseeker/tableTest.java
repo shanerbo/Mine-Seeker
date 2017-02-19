@@ -2,16 +2,14 @@ package com.example.ottot.mineseeker;
 
 import org.junit.Test;
 
-import static org.junit.Assert.*;
-
 /**
  * Created by ottot on 2/18/2017.
  */
 public class tableTest {
     @Test
     public void searchMines() throws Exception {
-        table test = new table(5,10);
-        //test.printTable();
+        table test = new table(10,5);
+        test.printTable();
     }
 
     @Test
