@@ -11,19 +11,21 @@ public class table {//use tableTest to see what it does
     private int tableCols; //width of the table, x value
     private int tableRows; //height of the table, y value
     private int[][] allBlocks;
+    private int numOfMines; //total number of mines, set by user
     private int[] mineOfEachRows;
     private int[] mineOfEachCols;
 
     //initialization functions
-    public table(int tableRows, int tableCols) {
+    public table(int tableRows, int tableCols,int num_Mine) {
         this.tableCols = tableCols;
         this.tableRows = tableRows;
+        this.numOfMines = num_Mine;
         allBlocks = new int[tableRows][tableCols];
-        for (int i = 0;i<tableRows;i++){//randomize the 2d array
-            for (int j = 0;j<tableCols;j++){
-                Random rg = new Random();
-                allBlocks[i][j] = rg.nextInt(2);
-            }
+        for (int i = 0;i<num_Mine;i++){//randomize the 2d array
+            Random rg = new Random();
+            int random_col = rg.nextInt(tableCols);
+            int random_row = rg.nextInt(tableRows);
+            allBlocks[random_row][random_col] = 1;
         }
         mineOfEachCols = new int[tableCols];
         mineOfEachRows = new int[tableRows];
@@ -48,12 +50,13 @@ public class table {//use tableTest to see what it does
         if (getBlock(rowIndex,colIndex)==1){
             mineOfEachRows[rowIndex]--;
             mineOfEachCols[colIndex]--;
+            numOfMines --;
             return 1;
         }
         else return 0;
     }
     //called to get the number on the block, which is the sum of mines in the row and column
-    public int numOfMines(int rowIndex, int colIndex){
+    public int numOfMines_at(int rowIndex, int colIndex){
         if (allBlocks[rowIndex][colIndex]==1){
             return mineOfEachCols[colIndex] + mineOfEachRows[rowIndex] - 1;
         }
@@ -61,7 +64,7 @@ public class table {//use tableTest to see what it does
     }
     //----------------------------------
 
-    //test, visualizing tools------------
+    //test use, visualizing tools------------
     public void printTable(){
         for (int i = 0;i<tableRows;i++){
             for (int j = 0;j<tableCols;j++){
@@ -99,6 +102,14 @@ public class table {//use tableTest to see what it does
     }
     public void setTableRows(int tableRows) {
         this.tableRows = tableRows;
+    }
+
+    public int getNumOfMines() {
+        return numOfMines;
+    }
+
+    public void setNumOfMines(int numOfMines) {
+        this.numOfMines = numOfMines;
     }
     //-----------------------------------------
 }

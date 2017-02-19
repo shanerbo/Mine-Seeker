@@ -12,13 +12,14 @@ public class UserMenu extends AppCompatActivity {//this is the actual main activ
     private table game_data; //always rowIndex(y) first, colIndex(x) second
     private int default_row = 6;
     private int default_col = 10;
+    private int default_numOfMines = 20;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_menu);
 
         //initialize table data with default values
-        game_data = new table(default_row,default_col);
+        game_data = new table(default_row,default_col,default_numOfMines);
 
 //        //activation for the three buttons on main menu page
         final Button startGame = (Button)findViewById(R.id.Game_start);
@@ -54,8 +55,8 @@ public class UserMenu extends AppCompatActivity {//this is the actual main activ
         return game_data;
     }//for the game to get data
 
-    public void reSize(int newRow, int newCol){
-        game_data = new table(newRow, newCol);
+    public void reSize(int newRow, int newCol,int newNumOfMines){
+        game_data = new table(newRow, newCol,newNumOfMines);
     }//for the resizing feature in the options page
 
     public static Intent makeIntent(Context context){

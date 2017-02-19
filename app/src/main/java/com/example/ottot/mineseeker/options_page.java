@@ -21,6 +21,8 @@ public class options_page extends AppCompatActivity {
                 finish();
             }
         });
+
+
     }
 
     public static Intent makeIntent(Context userMenu) {
