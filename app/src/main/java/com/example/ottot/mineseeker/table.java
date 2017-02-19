@@ -7,7 +7,7 @@ import java.util.Arrays;
  * Created by ottot on 2/10/2017.
  */
 
-public class table {
+public class table {//use tableTest to see what it does
     private int tableCols; //width of the table, x value
     private int tableRows; //height of the table, y value
     private int[][] allBlocks;
@@ -19,7 +19,7 @@ public class table {
         this.tableCols = tableCols;
         this.tableRows = tableRows;
         allBlocks = new int[tableRows][tableCols];
-        for (int i = 0;i<tableRows;i++){
+        for (int i = 0;i<tableRows;i++){//randomize the 2d array
             for (int j = 0;j<tableCols;j++){
                 Random rg = new Random();
                 allBlocks[i][j] = rg.nextInt(2);
@@ -61,7 +61,7 @@ public class table {
     }
     //----------------------------------
 
-
+    //test, visualizing tools------------
     public void printTable(){
         for (int i = 0;i<tableRows;i++){
             for (int j = 0;j<tableCols;j++){
@@ -82,7 +82,7 @@ public class table {
         }
         System.out.print("\n\n");
     }
-
+    //----------------------------------------
     //getters & setters
     public int getBlock(int y, int x){
         return allBlocks[y][x];
@@ -100,4 +100,5 @@ public class table {
     public void setTableRows(int tableRows) {
         this.tableRows = tableRows;
     }
+    //-----------------------------------------
 }

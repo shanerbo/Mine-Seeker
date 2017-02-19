@@ -7,7 +7,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-public class UserMenu extends AppCompatActivity {
+public class UserMenu extends AppCompatActivity {//this is the actual main activity
+    //check out table.java
     private table game_data; //always rowIndex(y) first, colIndex(x) second
     private int default_row = 6;
     private int default_col = 10;
@@ -51,11 +52,11 @@ public class UserMenu extends AppCompatActivity {
 
     public table getData(){
         return game_data;
-    }
+    }//for the game to get data
 
     public void reSize(int newRow, int newCol){
         game_data = new table(newRow, newCol);
-    }
+    }//for the resizing feature in the options page
 
     public static Intent makeIntent(Context context){
         return new Intent(context, UserMenu.class);
