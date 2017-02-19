@@ -13,6 +13,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // enter game button activation
         Button enterGame = (Button)findViewById(R.id.Enter_game);
         enterGame.setOnClickListener(new View.OnClickListener() {
             @Override

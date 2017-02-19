@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_user_menu"
     android:layout_width="match_parent"
@@ -16,37 +17,54 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:id="@+id/textView"
+        android:id="@+id/main_menu"
         android:textSize="24sp" />
-
-    <Button
-        android:text="@string/start"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/textView"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginLeft="55dp"
-        android:layout_marginStart="55dp"
-        android:layout_marginTop="27dp"
-        android:id="@+id/Game_start" />
-
-    <Button
-        android:text="@string/options"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:layout_alignRight="@+id/Game_start"
-        android:layout_alignEnd="@+id/Game_start"
-        android:id="@+id/button2" />
 
     <Button
         android:text="@string/help"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:id="@+id/button3"
-        android:layout_below="@+id/button2"
-        android:layout_alignLeft="@+id/button2"
-        android:layout_alignStart="@+id/button2" />
+        android:id="@+id/help_btn"
+        android:layout_marginLeft="48dp"
+        android:layout_marginStart="48dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/shutterstock_80072857"
+        android:id="@+id/main_menu_img"
+        android:layout_marginRight="27dp"
+        android:layout_marginEnd="27dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="30dp"
+        android:layout_below="@+id/main_menu"
+        android:layout_marginLeft="78dp"
+        android:layout_marginStart="78dp"
+        android:layout_alignLeft="@+id/main_menu"
+        android:layout_alignStart="@+id/main_menu" />
+
+    <Button
+        android:text="@string/start"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/Game_start"
+        android:layout_alignTop="@+id/main_menu_img"
+        android:layout_alignLeft="@+id/options_btn"
+        android:layout_alignStart="@+id/options_btn" />
+
+    <Button
+        android:text="@string/options"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/options_btn"
+        android:layout_below="@+id/Game_start"
+        android:layout_alignLeft="@+id/help_btn"
+        android:layout_alignStart="@+id/help_btn"
+        android:layout_marginTop="38dp" />
+
 </RelativeLayout>

@@ -5,8 +5,8 @@ package com.example.ottot.mineseeker;
  */
 
 public class table {
-    private int tableCols;
-    private int tableRows;
+    private int tableCols; //width of the table, x value
+    private int tableRows; //height of the table, y value
     private block[][] allBlocks;
     private int[] mineOfEachRows;
     private int[] mineOfEachCols;
@@ -36,7 +36,7 @@ public class table {
 
     //User interaction functions
     //called when user taps a block
-    public int guessMine(int rowIndex, int colIndex){
+    public int guessMine(int rowIndex, int colIndex){ //pass in the coordinate of the guessed block, determines if it's a hit or miss
         if (allBlocks[rowIndex][colIndex].getMine()==1){
             mineOfEachRows[colIndex]--;
             mineOfEachCols[rowIndex]--;

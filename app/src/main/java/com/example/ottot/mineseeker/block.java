@@ -7,7 +7,9 @@ import java.util.Random;
  */
 
 public class block {
+
     private int Mine;
+
     public block(){
         Random rg = new Random();
         Mine = rg.nextInt(1);
