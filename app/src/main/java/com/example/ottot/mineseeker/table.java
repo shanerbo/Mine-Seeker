@@ -1,8 +1,6 @@
 package com.example.ottot.mineseeker;
 
-import java.lang.reflect.Array;
 import java.util.Random;
-import java.util.Arrays;
 /**
  * Created by ottot on 2/10/2017.
  */
@@ -21,16 +19,26 @@ public class table {//use tableTest to see what it does
         this.tableRows = tableRows;
         this.numOfMines = num_Mine;
         allBlocks = new int[tableRows][tableCols];
-        for (int i = 0;i<num_Mine;i++){//randomize the 2d array
-            Random rg = new Random();
-            int random_col = rg.nextInt(tableCols);
-            int random_row = rg.nextInt(tableRows);
-            allBlocks[random_row][random_col] = 1;
-        }
+        generateMines();
         mineOfEachCols = new int[tableCols];
         mineOfEachRows = new int[tableRows];
         searchMines();
     }
+
+
+    private void generateMines(){
+        Random rg = new Random();
+        int i = 0;
+        while (i<numOfMines){
+            int randRow = rg.nextInt(tableRows);
+            int randCol = rg.nextInt(tableCols);
+            if (allBlocks[randRow][randCol] != 1){
+                allBlocks[randRow][randCol]=1;
+                i++;
+            }
+        }
+    }
+
 
     public void searchMines(){
         for (int i = 0; i< tableRows; i++){
