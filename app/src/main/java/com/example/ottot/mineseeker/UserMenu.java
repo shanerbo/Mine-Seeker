@@ -15,12 +15,17 @@ public class UserMenu extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_menu);
+
+        //initialize table data with default values
         game_data = new table(default_row,default_col);
-        Button startGame = (Button)findViewById(R.id.Game_start);
+
+        //activation for the three buttons
+        final Button startGame = (Button)findViewById(R.id.Game_start);
         startGame.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent game_Start = main_Game.makeIntent(UserMenu.this);
+                startActivity(game_Start);
             }
         });
 
@@ -29,8 +34,19 @@ public class UserMenu extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent go_to_opt = options_page.makeIntent(UserMenu.this);
+                startActivity(go_to_opt);
             }
         });
+
+        Button help = (Button)findViewById(R.id.return_btn);
+        help.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent go_to_help = help_page.makeIntent(UserMenu.this);
+                startActivity(go_to_help);
+            }
+        });
+        //------------------------------------
     }
 
     public table getData(){
