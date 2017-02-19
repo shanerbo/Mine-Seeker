@@ -1,7 +1,8 @@
 package com.example.ottot.mineseeker;
 
+import java.lang.reflect.Array;
 import java.util.Random;
-
+import java.util.Arrays;
 /**
  * Created by ottot on 2/10/2017.
  */
@@ -14,7 +15,7 @@ public class table {
     private int[] mineOfEachCols;
 
     //initialization functions
-    public table(int tableCols, int tableRows) {
+    public table(int tableRows, int tableCols) {
         this.tableCols = tableCols;
         this.tableRows = tableRows;
         allBlocks = new int[tableRows][tableCols];
@@ -44,16 +45,19 @@ public class table {
     //User interaction functions
     //called when user taps a block
     public int guessMine(int rowIndex, int colIndex){ //pass in the coordinate of the guessed block, determines if it's a hit or miss
-        if (allBlocks[rowIndex][colIndex]==1){
-            mineOfEachRows[colIndex]--;
-            mineOfEachCols[rowIndex]--;
+        if (getBlock(rowIndex,colIndex)==1){
+            mineOfEachRows[rowIndex]--;
+            mineOfEachCols[colIndex]--;
             return 1;
         }
         else return 0;
     }
     //called to get the number on the block, which is the sum of mines in the row and column
     public int numOfMines(int rowIndex, int colIndex){
-        return mineOfEachCols[rowIndex] + mineOfEachRows[colIndex];
+        if (allBlocks[rowIndex][colIndex]==1){
+            return mineOfEachCols[colIndex] + mineOfEachRows[rowIndex] - 1;
+        }
+        else return mineOfEachCols[colIndex] + mineOfEachRows[rowIndex];
     }
     //----------------------------------
 
@@ -66,7 +70,24 @@ public class table {
             System.out.print('\n');
         }
     }
+    public void printNumArrays() {
+        System.out.println("mineOfEachCols: ");
+        for (int i=0;i<mineOfEachCols.length;i++){
+            System.out.print(mineOfEachCols[i]);
+        }
+
+        System.out.println("\nmineOfEachRows: ");
+        for (int i=0;i<mineOfEachRows.length;i++){
+            System.out.print(mineOfEachRows[i]);
+        }
+        System.out.print("\n\n");
+    }
+
     //getters & setters
+    public int getBlock(int y, int x){
+        return allBlocks[y][x];
+    }
+
     public int getTableCols() {
         return tableCols;
     }
@@ -74,7 +95,7 @@ public class table {
         return tableRows;
     }
     public void setTableCols(int tableCols) {
-        this.tableRows = tableCols;
+        this.tableCols = tableCols;
     }
     public void setTableRows(int tableRows) {
         this.tableRows = tableRows;
