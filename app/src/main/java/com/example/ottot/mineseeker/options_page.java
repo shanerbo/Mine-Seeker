@@ -10,6 +10,7 @@ import android.widget.Adapter;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.example.ottot.mineseeker.UserMenu;
 
@@ -37,7 +38,6 @@ public class options_page extends AppCompatActivity {
 
         final Intent result = new Intent();
 
-        setResult(Activity.RESULT_OK,result);
         String dim = dimSpinner.getSelectedItem().toString();
         String mine = mineSpinner.getSelectedItem().toString();
         result.putExtra("dimension",dim);
@@ -48,8 +48,9 @@ public class options_page extends AppCompatActivity {
         done.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String dim = dimSpinner.getSelectedItem().toString();
-                String mine = mineSpinner.getSelectedItem().toString();
+                int dim = dimSpinner.getSelectedItemPosition();
+                int mine = mineSpinner.getSelectedItemPosition();
+                Toast.makeText(options_page.this,"dim is "+dim,Toast.LENGTH_SHORT).show();
                 result.putExtra("dimension",dim);
                 result.putExtra("mineNum",mine);
                 setResult(Activity.RESULT_OK,result);
@@ -64,8 +65,6 @@ public class options_page extends AppCompatActivity {
                 result.putExtra("resetOrNot",1);
             }
         });
-
-
     }
 
     public static Intent makeIntent(Context userMenu) {

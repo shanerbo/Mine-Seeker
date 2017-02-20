@@ -7,13 +7,14 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.w3c.dom.Text;
 
 public class UserMenu extends AppCompatActivity {//this is the actual main activity
     //check out table.java
     private int dim_code;//0= 4*6, 1 = 5*7, 2=6*8, 3=4*8, 4=5*12, 5= 6*15
-    private int mine_code;
+    private int mine_code;//0 = 6, 1 = 10, 2 = 15, 3 = 25, 4 = 35
     private static int TimePlayed;
     private static int BestScore;
 
@@ -23,7 +24,7 @@ public class UserMenu extends AppCompatActivity {//this is the actual main activ
         setContentView(R.layout.activity_user_menu);
         //initialize table data with default values
 
-        TimePlayed=0;
+        TimePlayed=222;
         BestScore=0;
 //        //activation for the three buttons on main menu page
         final Button startGame = (Button)findViewById(R.id.Game_start);
@@ -63,45 +64,16 @@ public class UserMenu extends AppCompatActivity {//this is the actual main activ
     }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-
-        if (data.getIntExtra("resetOrNot",0) == 1){
-            resetPlaytime();
-         }
-        if (data.getStringExtra("dimension")=="4 rows by 6 cols"){
-            dim_code = 0;
+        switch (requestCode) {
+            case 2:
+                if (data.getIntExtra("resetOrNot", 0) == 1) {
+                    resetPlaytime();
+                }
+                dim_code = data.getIntExtra("dimension",0);
+                mine_code = data.getIntExtra("mineNum",0);
+                Toast.makeText(UserMenu.this, "The dim_code is now " + dim_code + ". And mine_code is now " + mine_code, Toast.LENGTH_SHORT).show();
+                break;
         }
-        else if (data.getStringExtra("dimension")=="5 rows by 7 cols"){
-            dim_code = 1;
-        }
-        else if (data.getStringExtra("dimension")=="6 rows by 8 cols"){
-            dim_code = 2;
-        }
-        else if (data.getStringExtra("dimension")=="4 rows by 8 cols"){
-            dim_code = 3;
-        }
-        else if (data.getStringExtra("dimension")=="5 rows by 12 cols"){
-            dim_code = 4;
-        }
-        else if (data.getStringExtra("dimension")=="6 rows by 15 cols"){
-            dim_code = 5;
-        }
-
-        if (data.getStringExtra("mineNum")=="6"){
-            mine_code = 0;
-        }
-        else if (data.getStringExtra("mineNum")=="10"){
-            mine_code = 1;
-        }
-        else if (data.getStringExtra("mineNum")=="15"){
-            mine_code = 2;
-        }
-        else if (data.getStringExtra("mineNum")=="25"){
-            mine_code = 3;
-        }
-        else if (data.getStringExtra("mineNum")=="35"){
-            mine_code = 4;
-        }
-        System.out.print(dim_code);
     }
 
     private void resetPlaytime(){
