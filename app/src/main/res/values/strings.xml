@@ -27,7 +27,8 @@
         <item>5 rows by 12 cols</item>
         <item>6 rows by 15 cols</item>
     </string-array>
-
+    <string name="findIntro">You have found 0 out of 6 mines</string>
+    <string name="scrIntro">Scroe: 0</string>
     <string-array name="numMineDD">
         <item>6</item>
         <item>10</item>

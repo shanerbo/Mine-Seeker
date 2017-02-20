@@ -35,6 +35,9 @@ public class UserMenu extends AppCompatActivity {//this is the actual main activ
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         switch (requestCode) {
+            case 1:
+                //111
+                break;
             case 2:
                 if (data.getIntExtra("resetTimeOrNot", 0) == 1) {
                     resetPlaytime();
@@ -56,7 +59,11 @@ public class UserMenu extends AppCompatActivity {//this is the actual main activ
             @Override
             public void onClick(View v) {
                 Intent game_Start = main_Game.makeIntent(UserMenu.this);
-                startActivity(game_Start);
+                game_Start.putExtra("dimCode",dim_code);
+                game_Start.putExtra("mineCode",mine_code);
+                game_Start.putExtra("time",TimePlayed);
+                game_Start.putExtra("scr",BestScore);
+                startActivityForResult(game_Start,1);
             }
         });
     }
