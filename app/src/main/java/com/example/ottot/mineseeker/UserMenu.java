@@ -71,7 +71,7 @@ public class UserMenu extends AppCompatActivity {//this is the actual main activ
                 }
                 dim_code = data.getIntExtra("dimension",0);
                 mine_code = data.getIntExtra("mineNum",0);
-                Toast.makeText(UserMenu.this, "The dim_code is now " + dim_code + ". And mine_code is now " + mine_code, Toast.LENGTH_SHORT).show();
+                //Toast.makeText(UserMenu.this, "The dim_code is now " + dim_code + ". And mine_code is now " + mine_code, Toast.LENGTH_SHORT).show();
                 break;
         }
     }

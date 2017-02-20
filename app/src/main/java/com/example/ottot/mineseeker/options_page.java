@@ -63,6 +63,7 @@ public class options_page extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 result.putExtra("resetOrNot",1);
+                Toast.makeText(options_page.this,"You have erased the time played",Toast.LENGTH_SHORT).show();
             }
         });
     }
