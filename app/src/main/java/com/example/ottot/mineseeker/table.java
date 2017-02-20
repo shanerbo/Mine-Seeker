@@ -13,6 +13,8 @@ public class table {//use tableTest to see what it does
     private int[] mineOfEachRows;
     private int[] mineOfEachCols;
 
+
+
     //initialization functions
     public table(int tableRows, int tableCols,int num_Mine) {
         this.tableCols = tableCols;

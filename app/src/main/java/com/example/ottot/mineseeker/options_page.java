@@ -1,24 +1,57 @@
 package com.example.ottot.mineseeker;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Adapter;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.Spinner;
+
+import com.example.ottot.mineseeker.UserMenu;
 
 public class options_page extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_options_page);
 
+        final Spinner dimSpinner = (Spinner) findViewById(R.id.dimDD);
+        final Spinner mineSpinner = (Spinner) findViewById(R.id.numMineDD);
+        ArrayAdapter<String> mineAdapter = new ArrayAdapter<String>(options_page.this, android.R.layout.simple_list_item_1,getResources().getStringArray(R.array.numMineDD));
+        ArrayAdapter<String> dimAdapter = new ArrayAdapter<String>(options_page.this,android.R.layout.simple_list_item_1,getResources().getStringArray(R.array.dimDD));
+        dimAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        mineAdapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
+        dimSpinner.setAdapter(dimAdapter);
+        mineSpinner.setAdapter(mineAdapter);
+
+
+
+        final Intent result = new Intent();
+        result.putExtra("resetOrNot",0);
+        setResult(Activity.RESULT_OK,result);
         Button done = (Button) findViewById(R.id.opt_ret_btn);
         done.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                setResult(Activity.RESULT_OK,result);
+                String dim = dimSpinner.getSelectedItem().toString();
+                String mine = mineSpinner.getSelectedItem().toString();
+
                 finish();
+            }
+        });
+
+        Button eraseData = (Button) findViewById(R.id.ResetTimePlay);
+        eraseData.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                result.putExtra("resetOrNot",1);
             }
         });
 
