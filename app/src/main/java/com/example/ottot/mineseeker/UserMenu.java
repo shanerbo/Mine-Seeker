@@ -25,8 +25,32 @@ public class UserMenu extends AppCompatActivity {//this is the actual main activ
         //initialize table data with default values
 
         TimePlayed=222;
-        BestScore=0;
-//        //activation for the three buttons on main menu page
+        BestScore=120;
+        startGame();
+        optionMenu();
+        helpMenu();
+        showInfo();
+        //------------------------------------
+    }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        switch (requestCode) {
+            case 2:
+                if (data.getIntExtra("resetTimeOrNot", 0) == 1) {
+                    resetPlaytime();
+                }
+                if (data.getIntExtra("resetScoreOrNot", 0) == 1) {
+                    resetBestScore();
+                }
+                dim_code = data.getIntExtra("dimension",0);
+                mine_code = data.getIntExtra("mineNum",0);
+                break;
+        }
+    }
+
+
+
+    private void startGame() {
         final Button startGame = (Button)findViewById(R.id.Game_start);
         startGame.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -35,7 +59,8 @@ public class UserMenu extends AppCompatActivity {//this is the actual main activ
                 startActivity(game_Start);
             }
         });
-
+    }
+    private void optionMenu() {
         final Button options = (Button)findViewById(R.id.options_btn);
         options.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -48,8 +73,8 @@ public class UserMenu extends AppCompatActivity {//this is the actual main activ
                 startActivityForResult(go_to_opt,2);
             }
         });
-
-
+    }
+    private void helpMenu() {
         final Button help = (Button)findViewById(R.id.help_btn);
         help.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -58,29 +83,22 @@ public class UserMenu extends AppCompatActivity {//this is the actual main activ
                 startActivity(go_to_help);
             }
         });
+    }
+    private void showInfo() {
         TextView timePlay = (TextView) findViewById(R.id.TimePlayed);
         timePlay.setText(""+TimePlayed);
-        //------------------------------------
-    }
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        switch (requestCode) {
-            case 2:
-                if (data.getIntExtra("resetOrNot", 0) == 1) {
-                    resetPlaytime();
-                }
-                dim_code = data.getIntExtra("dimension",0);
-                mine_code = data.getIntExtra("mineNum",0);
-                break;
-        }
+        TextView bestScore = (TextView) findViewById(R.id.BestScore);
+        bestScore.setText(""+ BestScore);
     }
 
     private void resetPlaytime(){
         TimePlayed = 0;
-        TextView timePlay = (TextView) findViewById(R.id.TimePlayed);
-        timePlay.setText(""+TimePlayed);
+        showInfo();
     }
-
+    private void resetBestScore() {
+        BestScore = 0;
+        showInfo();
+    }
 
     public static Intent makeIntent(Context context){
         return new Intent(context, UserMenu.class);

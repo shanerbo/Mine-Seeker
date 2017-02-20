@@ -57,12 +57,20 @@ public class options_page extends AppCompatActivity {
             }
         });
 
-        Button eraseData = (Button) findViewById(R.id.ResetTimePlay);
-        eraseData.setOnClickListener(new View.OnClickListener() {
+        Button eraseTime = (Button) findViewById(R.id.ResetTimePlay);
+        eraseTime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                result.putExtra("resetOrNot",1);
+                result.putExtra("resetTimeOrNot",1);
                 Toast.makeText(options_page.this,"You have erased the time played",Toast.LENGTH_SHORT).show();
+            }
+        });
+        Button eraseScore = (Button) findViewById(R.id.clearBestScore);
+        eraseScore.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                result.putExtra("resetScoreOrNot",1);
+                Toast.makeText(options_page.this,"You have erased the best score",Toast.LENGTH_SHORT).show();
             }
         });
     }
