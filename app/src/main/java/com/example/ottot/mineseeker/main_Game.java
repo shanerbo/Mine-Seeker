@@ -17,9 +17,13 @@ public class main_Game extends AppCompatActivity {
     private int numOfMine;
     private int timePlayed;
     private int bestScr;
+    private int guessed;
+    private int currentScr = 0;
 
-    Button mine_btns[][];
-    int mine_icon_ID = R.mipmap.mine_icon;
+    private Button mine_btns[][];
+    private int mine_icon_ID = R.mipmap.mine_icon;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -92,6 +96,7 @@ public class main_Game extends AppCompatActivity {
     private void mineGuess(int row,int col){
         if (game_data.guessMine(row,col)==1){
             mine_btns[row][col].setBackgroundResource(mine_icon_ID);
+            guessed++;
         }
         else
             mine_btns[row][col].setText(""+game_data.numOfMines_at(row,col));
@@ -100,6 +105,7 @@ public class main_Game extends AppCompatActivity {
 
     private void updateUI() {
         TextView foundMine = (TextView)findViewById(R.id.found_mine);
+        foundMine.setText("You Have found " + guessed + " out of " + game_data.getNumOfMines() + " mines");
 
     }
 
