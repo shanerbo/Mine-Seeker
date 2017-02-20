@@ -2,6 +2,7 @@ package com.example.ottot.mineseeker;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -13,19 +14,21 @@ import org.w3c.dom.Text;
 
 public class UserMenu extends AppCompatActivity {//this is the actual main activity
     //check out table.java
-    private int dim_code;//0= 4*6, 1 = 5*7, 2=6*8, 3=4*8, 4=5*12, 5= 6*15
+    private int dim_code = 0;//0= 4*6, 1 = 5*7, 2=6*8, 3=4*8, 4=5*12, 5= 6*15
+    private static int num_of_dim = 5;
     private int mine_code;//0 = 6, 1 = 10, 2 = 15, 3 = 25, 4 = 35
     private static int TimePlayed;
-    private static int BestScore;
+    private static int[] BestScores = new int[num_of_dim];
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_menu);
+
         //initialize table data with default values
 
-        TimePlayed=222;
-        BestScore=120;
+        TimePlayed=0;
+        BestScores[dim_code]=0;
         startGame();
         optionMenu();
         helpMenu();
@@ -47,6 +50,7 @@ public class UserMenu extends AppCompatActivity {//this is the actual main activ
                 }
                 dim_code = data.getIntExtra("dimension",0);
                 mine_code = data.getIntExtra("mineNum",0);
+                showInfo();
                 break;
         }
     }
@@ -62,7 +66,7 @@ public class UserMenu extends AppCompatActivity {//this is the actual main activ
                 game_Start.putExtra("dimCode",dim_code);
                 game_Start.putExtra("mineCode",mine_code);
                 game_Start.putExtra("time",TimePlayed);
-                game_Start.putExtra("scr",BestScore);
+                game_Start.putExtra("scr",BestScores[dim_code]);
                 startActivityForResult(game_Start,1);
             }
         });
@@ -95,16 +99,19 @@ public class UserMenu extends AppCompatActivity {//this is the actual main activ
         TextView timePlay = (TextView) findViewById(R.id.TimePlayed);
         timePlay.setText(""+TimePlayed);
         TextView bestScore = (TextView) findViewById(R.id.BestScore);
-        bestScore.setText(""+ BestScore);
+        Resources res = getResources();
+        String[] dimStrArr = res.getStringArray(R.array.dimDD);
+        String dimStr = dimStrArr[dim_code];
+        bestScore.setText(BestScores[dim_code]+", for dimension -- " + dimStr);
     }
 
     private void resetPlaytime(){
         TimePlayed = 0;
-        showInfo();
     }
     private void resetBestScore() {
-        BestScore = 0;
-        showInfo();
+        for (int i = 0;i<num_of_dim;i++){
+            BestScores[i] = 0;
+        }
     }
 
     public static Intent makeIntent(Context context){
