@@ -21,6 +21,8 @@ public class options_page extends AppCompatActivity {
 
         setContentView(R.layout.activity_options_page);
 
+        Intent passedIn = getIntent();
+
         final Spinner dimSpinner = (Spinner) findViewById(R.id.dimDD);
         final Spinner mineSpinner = (Spinner) findViewById(R.id.numMineDD);
         ArrayAdapter<String> mineAdapter = new ArrayAdapter<String>(options_page.this, android.R.layout.simple_list_item_1,getResources().getStringArray(R.array.numMineDD));
@@ -30,19 +32,27 @@ public class options_page extends AppCompatActivity {
         dimSpinner.setAdapter(dimAdapter);
         mineSpinner.setAdapter(mineAdapter);
 
-
+        dimSpinner.setSelection(passedIn.getIntExtra("table_dim",0));
+        mineSpinner.setSelection(passedIn.getIntExtra("numberMine",0));
 
         final Intent result = new Intent();
-        result.putExtra("resetOrNot",0);
+
+        setResult(Activity.RESULT_OK,result);
+        String dim = dimSpinner.getSelectedItem().toString();
+        String mine = mineSpinner.getSelectedItem().toString();
+        result.putExtra("dimension",dim);
+        result.putExtra("mineNum",mine);
+
         setResult(Activity.RESULT_OK,result);
         Button done = (Button) findViewById(R.id.opt_ret_btn);
         done.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                setResult(Activity.RESULT_OK,result);
                 String dim = dimSpinner.getSelectedItem().toString();
                 String mine = mineSpinner.getSelectedItem().toString();
-
+                result.putExtra("dimension",dim);
+                result.putExtra("mineNum",mine);
+                setResult(Activity.RESULT_OK,result);
                 finish();
             }
         });

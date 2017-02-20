@@ -84,7 +84,7 @@
         android:layout_alignLeft="@+id/BestScoreTittle"
         android:layout_alignStart="@+id/BestScoreTittle"
         android:layout_below="@+id/BestScoreTittle"
-        android:text="TextView"
+        android:text="@string/initNum"
         android:textSize="16sp" />
 
     <TextView
@@ -106,7 +106,7 @@
         android:layout_alignLeft="@+id/TimePlayedTittle"
         android:layout_alignStart="@+id/TimePlayedTittle"
         android:layout_below="@+id/TimePlayedTittle"
-        android:text="TextView"
+        android:text="@string/initNum"
         android:textSize="16sp"/>
 
 </RelativeLayout>

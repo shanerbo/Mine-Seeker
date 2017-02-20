@@ -17,7 +17,7 @@
     <string name="menu_img_description">a menu welcome image</string>
     <string name="BestScroreTittle">Your Best Score is:</string>
     <string name="TimePlayedTittle">Times You played:</string>
-
+    <string name="initNum">0</string>
     <string-array name="dimDD">
         <item>4 rows by 6 cols</item>
         <item>5 rows by 7 cols</item>
