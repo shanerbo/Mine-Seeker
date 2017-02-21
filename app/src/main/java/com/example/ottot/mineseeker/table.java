@@ -120,8 +120,9 @@ public class table {//use tableTest to see what it does
     public int getRemainScanTimes(){
         return scanTimes;
     }
-    public int addMoreTime(){
-        return scanTimes = 10;
+    public void addMoreTime(){
+        scanTimes = 10;
+        return;
     }
 
     public int buttonIsClicked(int y, int x){
