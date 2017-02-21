@@ -77,6 +77,9 @@ public class table {//use tableTest to see what it does
             allBlocks[rowIndex][colIndex]=3;
             return 2;
         }
+        else if (getBlock(rowIndex,colIndex)==3){
+            return 3;
+        }
         return 0;
     }
     //called to get the number on the block, which is the sum of mines in the row and column

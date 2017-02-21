@@ -123,6 +123,8 @@ public class main_Game extends AppCompatActivity {
                     scrDeduct();
                     refreshABtn(row,col);
                     break;
+                case (3):
+                    break;
             }
             refreshTable();
             updateUI();
