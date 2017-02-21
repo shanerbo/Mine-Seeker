@@ -106,23 +106,28 @@ public class main_Game extends AppCompatActivity {
         if (game_data.getRemainScanTimes() > 0) {
             int resultCode = game_data.guessMine(row,col);
             if (resultCode == 1) {
+                game_data.clickOnButton(row,col);
                 mine_btns[row][col].setBackgroundResource(mine_icon_ID);
                 guessed++;
                 currentScr += 100;
-                refreshTable();
                 updateUI();
             }
-            else if (resultCode == 2||resultCode == 3){
+            else if(resultCode==0||resultCode==2) {
+                if (resultCode==0){
+
+                }
                 if (currentScr > 20) {
                     currentScr -= 20;
-                }
-                else if (currentScr <= 20) {
+                    game_data.clickOnButton(row, col);
+
+                } else if (currentScr <= 20) {
                     currentScr = 0;
+                    game_data.clickOnButton(row, col);
                 }
                 refreshTable();
                 updateUI();
-            }
 
+            }
             if (guessed == numOfMine){
                 refreshTableWin();
                 Toast.makeText(main_Game.this, getString(R.string.youWin), Toast.LENGTH_SHORT).show();
@@ -147,16 +152,16 @@ public class main_Game extends AppCompatActivity {
                         public void onClick(DialogInterface dialog, int which) {
                             dialog.cancel();
                             Toast.makeText(main_Game.this, getString(R.string.poorGuy), Toast.LENGTH_SHORT).show();
-                            finish();
+                            returnToMenu();
                         }
                     })
                     .show();
-            returnToMenu();
         }
 
     }
 
     private void updateUI() {
+        refreshNewScr();
         TextView foundMine = (TextView)findViewById(R.id.found_mine);
         foundMine.setText(guessed + " / " + numOfMine + " mines found");
 
@@ -206,10 +211,14 @@ public class main_Game extends AppCompatActivity {
         }
     }
 
+    public void refreshABtn(int row, int col){
+        mine_btns[row][col].setText("" + game_data.numOfMines_at(row, col));
+    }
+
     public void refreshTable(){
         for (int i = 0; i < tableRow; i++){
             for (int j = 0; j < tableCol; j++){
-                if (game_data.getBlock(i,j) == 2 ){
+                if (game_data.getBlock(i,j) == 2){
                     mine_btns[i][j].setText("" + game_data.numOfMines_at(i, j));
                 }
             }

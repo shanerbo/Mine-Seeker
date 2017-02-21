@@ -9,6 +9,7 @@ public class table {//use tableTest to see what it does
     private int tableCols; //width of the table, x value
     private int tableRows; //height of the table, y value
     private int[][] allBlocks;
+    private int[][] checkClicked;
     private int numOfMines; //total number of mines, set by user
     private int[] mineOfEachRows;
     private int[] mineOfEachCols;
@@ -21,6 +22,7 @@ public class table {//use tableTest to see what it does
         this.tableRows = tableRows;
         this.numOfMines = num_Mine;
         allBlocks = new int[tableRows][tableCols];
+        checkClicked = new int[tableRows][tableCols];
         scanTimes = (int)(num_Mine + 0.35*tableCols*tableRows);
         generateMines();
         mineOfEachCols = new int[tableCols];
@@ -58,20 +60,23 @@ public class table {//use tableTest to see what it does
     //User interaction functions
     //called when user taps a block
     public int guessMine(int rowIndex, int colIndex){ //pass in the coordinate of the guessed block, determines if it's a hit or miss
-        if (getBlock(rowIndex, colIndex)!=2 && getBlock(rowIndex, colIndex)!=3 ) {//2 means that button is clicked and the button is not mine
-            scanTimes--;
-        }
-        if ((getBlock(rowIndex, colIndex) == 1) ){
+        if ((getBlock(rowIndex, colIndex) == 1) ){//1 means a hit
             mineOfEachRows[rowIndex]--;
             mineOfEachCols[colIndex]--;
             numOfMines --;
-            allBlocks[rowIndex][colIndex] = 3;//3 means that mines is found and the button is clicked;
+            allBlocks[rowIndex][colIndex] = 2;
             return 1;
         }
-        else {
-            allBlocks[rowIndex][colIndex] =2;
+        else if(getBlock(rowIndex,colIndex)==0){//0 means a miss
+            scanTimes--;
+            allBlocks[rowIndex][colIndex] = 3;//3 means an already scanned, nothing can wil be done
             return 0;
         }
+        else if(getBlock(rowIndex,colIndex)==2){//2 means a found already
+            scanTimes--;
+            return 2;
+        }
+        return 0;
     }
     //called to get the number on the block, which is the sum of mines in the row and column
     public int numOfMines_at(int rowIndex, int colIndex){
@@ -133,6 +138,16 @@ public class table {//use tableTest to see what it does
 
     public int getNumOfMines() {
         return numOfMines;
+    }
+
+    public void clickOnButton(int row, int col) {
+        checkClicked[row][col]=1;
+        return;
+
+    }
+
+    public int buttonIsClicked(int row, int col) {
+        return checkClicked[row][col];
     }
 
     //-----------------------------------------

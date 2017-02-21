@@ -133,27 +133,27 @@ public class UserMenu extends AppCompatActivity {//this is the actual main activ
         }
     }
 
-//    public void ChangePref(int[] BestScore){
-//        Array.toString
-//        SharedPreferences allScoresRef = PreferenceManager.getDefaultSharedPreferences(this.getApplicationContext());
-//        SharedPreferences.Editor allScoresRefEditor = allScoresRef.edit();
-//        Gson gson = new Gson();
-//        String new_allScoreList = gson.toJson(strBestScore);
-//        allScoresRefEditor.putString("new_allPots", new_allScoreList);
-//        allScoresRefEditor.apply();
-//    }
-//    public int[] GetPref(){
-//        SharedPreferences appSharedPrefs = PreferenceManager.getDefaultSharedPreferences(this.getApplicationContext());
-//        Gson gson = new Gson();
-//        String new_allScoreList = appSharedPrefs.getString("new_allPots", "");
-//        String[] new_allScore = gson.fromJson(new_allScoreList, String[].class);
-//        int[] inNewScore = new int[new_allScore.length];
-//
-//        for (int i = 0; i<new_allScore.length;i++){
-//            inNewScore[i] = Integer.parseInt(new_allScore[i]);
-//        }
-//        return inNewScore;
-//    }
+    public void savePref(){
+        SharedPreferences dataTosave = getApplicationContext().getSharedPreferences("MyPref",0);
+        SharedPreferences.Editor PrefEditor = dataTosave.edit();
+        PrefEditor.putInt("dim_code",dim_code);
+        PrefEditor.putInt("mine_code",mine_code);
+        String scores_into_string = BestScores.toString();
+        PrefEditor.putString("Best Scores",scores_into_string);
+
+    }
+    public void GetPref(){
+        SharedPreferences dataToGet = getApplicationContext().getSharedPreferences("MyPref",0);
+        if (dataToGet==null)return;
+        dim_code = dataToGet.getInt("dim_code",0);
+        mine_code = dataToGet.getInt("mine_code",0);
+        String scores_in_string = dataToGet.getString("Best Scores", null);
+        String splitor = scores_in_string.replaceAll("\\[|\\]|\\s", "");
+        String[] splited = splitor.split("\\,");
+        for (int i = 0; i< num_of_dim; i++){
+            BestScores[i]=Integer.parseInt(splited[i]);
+        }
+    }
 
     public static Intent makeIntent(Context context){
         return new Intent(context, UserMenu.class);
