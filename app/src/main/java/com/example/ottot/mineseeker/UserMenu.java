@@ -128,11 +128,9 @@ public class UserMenu extends AppCompatActivity {//this is the actual main activ
         TimePlayed = 0;
     }
     private void resetBestScore() {
-//        for (int i = 0;i<num_of_dim;i++){
-//            BestScores[i] = 0;
-//        }
-        BestScores[dim_code]=0;
-
+        for (int i = 0;i<num_of_dim;i++){
+            BestScores[i] = 0;
+        }
     }
 
 //    public void ChangePref(int[] BestScore){

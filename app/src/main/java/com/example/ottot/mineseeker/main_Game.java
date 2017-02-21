@@ -66,7 +66,6 @@ public class main_Game extends AppCompatActivity {
     private void mineFieldGenerate() {
         TableLayout mineField = (TableLayout)findViewById(R.id.mineField);
         game_data = new table(tableRow,tableCol,numOfMine);
-        table game_data_OG = game_data;
         mine_btns = new Button[tableRow][tableCol];
         updateUI();
 
@@ -105,31 +104,29 @@ public class main_Game extends AppCompatActivity {
 
     private void mineGuess(int row,int col) {
         if (game_data.getRemainScanTimes() > 0) {
-            if (game_data.guessMine(row, col) == 1) {
-                game_data.clickOnButton(row,col);
+            int resultCode = game_data.guessMine(row,col);
+            if (resultCode == 1) {
                 mine_btns[row][col].setBackgroundResource(mine_icon_ID);
                 guessed++;
                 currentScr += 100;
                 refreshTable();
                 updateUI();
             }
-            else{
-                if (game_data.buttonIsClicked(row,col) == 0 && currentScr>20) {
+            else if (resultCode == 2||resultCode == 3){
+                if (currentScr > 20) {
                     currentScr -= 20;
-                    game_data.clickOnButton(row,col);
-
                 }
-                else if (game_data.buttonIsClicked(row,col) == 0 && currentScr <=20){
+                else if (currentScr <= 20) {
                     currentScr = 0;
-                    game_data.clickOnButton(row,col);
                 }
                 refreshTable();
                 updateUI();
             }
+
             if (guessed == numOfMine){
                 refreshTableWin();
                 Toast.makeText(main_Game.this, getString(R.string.youWin), Toast.LENGTH_SHORT).show();
-                finish();
+                returnToMenu();
             }
         }
         else{
@@ -154,7 +151,9 @@ public class main_Game extends AppCompatActivity {
                         }
                     })
                     .show();
+            returnToMenu();
         }
+
     }
 
     private void updateUI() {
@@ -169,12 +168,15 @@ public class main_Game extends AppCompatActivity {
 
         TextView RemainScanTime = (TextView)findViewById(R.id.scanTimes);
         RemainScanTime.setText("Remaining Scan: " + game_data.getRemainScanTimes());
+    }
 
+
+    private void returnToMenu(){
         Intent gameResult = new Intent();
         gameResult.putExtra("bestScore",bestScr);
         gameResult.putExtra("timesPlay",timePlayed);
         setResult(Activity.RESULT_OK,gameResult);
-
+        finish();
     }
 
     private void dimensionGenerate(int Dcode) {
