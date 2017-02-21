@@ -59,7 +59,7 @@ public class main_Game extends AppCompatActivity {
     private void mineFieldGenerate() {
 
         TableLayout mineField = (TableLayout)findViewById(R.id.mineField);
-
+        updateUI();
         game_data = new table(tableRow,tableCol,numOfMine);
         mine_btns = new Button[tableRow][tableCol];
 
