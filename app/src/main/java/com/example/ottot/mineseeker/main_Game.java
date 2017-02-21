@@ -26,7 +26,7 @@ public class main_Game extends AppCompatActivity {
 
     private Button mine_btns[][];
     private int mine_icon_ID = R.mipmap.mine_icon;
-
+    private int happy_finish_ID = R.mipmap.happy_end;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -130,7 +130,23 @@ public class main_Game extends AppCompatActivity {
             if (guessed == numOfMine) {
                 refreshTableWin();
                 Toast.makeText(main_Game.this, getString(R.string.youWin), Toast.LENGTH_SHORT).show();
-                returnToMenu();
+
+                new AlertDialog.Builder(main_Game.this)
+                        .setTitle(R.string.youWin)
+                        .setMessage(R.string.backtotheMenu)
+                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                returnToMenu();
+                            }
+                        })
+                        .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                prepareIntent();
+                            }
+                        })
+                        .show();
             }
         }
         else{
@@ -159,6 +175,13 @@ public class main_Game extends AppCompatActivity {
 
     }
 
+    private void prepareIntent() {
+        Intent gameResult = new Intent();
+        gameResult.putExtra("bestScore",bestScr);
+        gameResult.putExtra("timesPlay",timePlayed);
+        setResult(Activity.RESULT_OK,gameResult);
+    }
+
     private void scrDeduct() {
         if (currentScr>=20){
             currentScr-=20;
@@ -184,10 +207,7 @@ public class main_Game extends AppCompatActivity {
 
 
     private void returnToMenu(){
-        Intent gameResult = new Intent();
-        gameResult.putExtra("bestScore",bestScr);
-        gameResult.putExtra("timesPlay",timePlayed);
-        setResult(Activity.RESULT_OK,gameResult);
+        prepareIntent();
         finish();
     }
 
@@ -240,7 +260,7 @@ public class main_Game extends AppCompatActivity {
     public void refreshTableWin(){
         for (int i = 0; i < tableRow; i++){
             for (int j = 0; j < tableCol; j++){
-                    mine_btns[i][j].setText("" + game_data.numOfMines_at(i, j));
+                    mine_btns[i][j].setBackgroundResource(happy_finish_ID);
                 }
             }
         }

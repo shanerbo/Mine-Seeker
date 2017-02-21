@@ -47,5 +47,5 @@
         <item>25</item>
         <item>35</item>
     </string-array>
-
+    <string name="backtotheMenu">Do you wish to head back to the menu?</string>
 </resources>
