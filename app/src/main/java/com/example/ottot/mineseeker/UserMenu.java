@@ -47,8 +47,8 @@ public class UserMenu extends AppCompatActivity {//this is the actual main activ
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         switch (requestCode) {
             case 1:
+                if (resultCode==RESULT_CANCELED)return;
                 BestScores[dim_code] = data.getIntExtra("bestScore",0);
-
                 TimePlayed = data.getIntExtra("timesPlay",TimePlayed);
                 showInfo();
                 break;
