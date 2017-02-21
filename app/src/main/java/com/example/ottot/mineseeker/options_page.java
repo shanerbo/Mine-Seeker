@@ -40,10 +40,9 @@ public class options_page extends AppCompatActivity {
 
         int dim = dimSpinner.getSelectedItemPosition();
         int mine = mineSpinner.getSelectedItemPosition();
-        result.putExtra("dimension",dim);
-        result.putExtra("mineNum",mine);
 
-        setResult(Activity.RESULT_OK,result);
+
+
         Button done = (Button) findViewById(R.id.opt_ret_btn);
         done.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -73,6 +72,7 @@ public class options_page extends AppCompatActivity {
                 Toast.makeText(options_page.this,"You have erased the best score",Toast.LENGTH_SHORT).show();
             }
         });
+        setResult(Activity.RESULT_CANCELED,result);
     }
 
     public static Intent makeIntent(Context userMenu) {

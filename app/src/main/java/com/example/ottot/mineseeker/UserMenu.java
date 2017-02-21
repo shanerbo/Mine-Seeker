@@ -15,7 +15,7 @@ import org.w3c.dom.Text;
 public class UserMenu extends AppCompatActivity {//this is the actual main activity
     //check out table.java
     private int dim_code = 0;//0= 4*6, 1 = 5*7, 2=6*8, 3=4*8, 4=5*12, 5= 6*15
-    private static int num_of_dim = 5;
+    private static int num_of_dim = 6;
     private int mine_code;//0 = 6, 1 = 10, 2 = 15, 3 = 25, 4 = 35
     private static int TimePlayed;
     private static int[] BestScores = new int[num_of_dim];
@@ -42,6 +42,9 @@ public class UserMenu extends AppCompatActivity {//this is the actual main activ
                 //111
                 break;
             case 2:
+                if (resultCode==RESULT_CANCELED){
+                    return;
+                }
                 if (data.getIntExtra("resetTimeOrNot", 0) == 1) {
                     resetPlaytime();
                 }
