@@ -14,7 +14,7 @@ import org.w3c.dom.Text;
 
 public class UserMenu extends AppCompatActivity {//this is the actual main activity
     //check out table.java
-    private int dim_code = 0;//0= 4*6, 1 = 5*7, 2=6*8, 3=4*8, 4=5*12, 5= 6*15
+    private int dim_code = 0;//0= 4*6, 1 = 5*8, 2=6*8, 3=4*8, 4=5*12, 5= 6*15
     private static int num_of_dim = 6;
     private int mine_code;//0 = 6, 1 = 10, 2 = 15, 3 = 25, 4 = 35
     private static int TimePlayed;
@@ -39,7 +39,7 @@ public class UserMenu extends AppCompatActivity {//this is the actual main activ
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         switch (requestCode) {
             case 1:
-                //111
+
                 break;
             case 2:
                 if (resultCode==RESULT_CANCELED){
@@ -74,6 +74,9 @@ public class UserMenu extends AppCompatActivity {//this is the actual main activ
             }
         });
     }
+
+
+
     private void optionMenu() {
         final Button options = (Button)findViewById(R.id.options_btn);
         options.setOnClickListener(new View.OnClickListener() {
@@ -105,16 +108,19 @@ public class UserMenu extends AppCompatActivity {//this is the actual main activ
         Resources res = getResources();
         String[] dimStrArr = res.getStringArray(R.array.dimDD);
         String dimStr = dimStrArr[dim_code];
-        bestScore.setText(BestScores[dim_code]+", for dimension -- " + dimStr);
+        TextView bestScoreTittle = (TextView) findViewById(R.id.BestScoreTittle);
+        bestScoreTittle.setText("Your Best Score in " + "["+dimStr +"] is :");
+        bestScore.setText(""+BestScores[dim_code]);
     }
 
     private void resetPlaytime(){
         TimePlayed = 0;
     }
     private void resetBestScore() {
-        for (int i = 0;i<num_of_dim;i++){
-            BestScores[i] = 0;
-        }
+//        for (int i = 0;i<num_of_dim;i++){
+//            BestScores[i] = 0;
+//        }
+        BestScores[dim_code]=0;
     }
 
     public static Intent makeIntent(Context context){

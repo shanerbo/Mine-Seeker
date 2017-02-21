@@ -9,9 +9,11 @@ public class table {//use tableTest to see what it does
     private int tableCols; //width of the table, x value
     private int tableRows; //height of the table, y value
     private int[][] allBlocks;
+    private int[][] checkClicked;
     private int numOfMines; //total number of mines, set by user
     private int[] mineOfEachRows;
     private int[] mineOfEachCols;
+    public int scanTimes;
 
 
     //initialization functions
@@ -19,8 +21,9 @@ public class table {//use tableTest to see what it does
         this.tableCols = tableCols;
         this.tableRows = tableRows;
         this.numOfMines = num_Mine;
-        int tempNumOfMines = numOfMines;
         allBlocks = new int[tableRows][tableCols];
+        checkClicked = new int[tableRows][tableCols];
+        scanTimes = (int)(num_Mine + 0.35*tableCols*tableRows);
         generateMines();
         mineOfEachCols = new int[tableCols];
         mineOfEachRows = new int[tableRows];
@@ -57,14 +60,20 @@ public class table {//use tableTest to see what it does
     //User interaction functions
     //called when user taps a block
     public int guessMine(int rowIndex, int colIndex){ //pass in the coordinate of the guessed block, determines if it's a hit or miss
+        if (getBlock(rowIndex, colIndex)!=2 && getBlock(rowIndex, colIndex)!=3 ) {//2 means that button is clicked and the button is not mine
+            scanTimes--;
+        }
         if ((getBlock(rowIndex, colIndex) == 1) ){
-            allBlocks[rowIndex][colIndex] = 0;//once a mine is detected change the value back to 0;
             mineOfEachRows[rowIndex]--;
             mineOfEachCols[colIndex]--;
             numOfMines --;
+            allBlocks[rowIndex][colIndex] = 3;//3 means that mines is found and the button is clicked;
             return 1;
         }
-        else return 0;
+        else {
+            allBlocks[rowIndex][colIndex] =2;
+            return 0;
+        }
     }
     //called to get the number on the block, which is the sum of mines in the row and column
     public int numOfMines_at(int rowIndex, int colIndex){
@@ -108,6 +117,19 @@ public class table {//use tableTest to see what it does
     public int getTableRows() {
         return tableRows;
     }
+    public int getRemainScanTimes(){
+        return scanTimes;
+    }
+    public int addMoreTime(){
+        return scanTimes = 10;
+    }
+
+    public int buttonIsClicked(int y, int x){
+        return checkClicked[y][x];
+    }
+    public void clickOnButton(int y, int x){
+        checkClicked[y][x] = 1;
+    }
     public void setTableCols(int tableCols) {
         this.tableCols = tableCols;
     }
@@ -124,3 +146,4 @@ public class table {//use tableTest to see what it does
     }
     //-----------------------------------------
 }
+

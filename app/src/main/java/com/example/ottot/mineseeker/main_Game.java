@@ -1,7 +1,9 @@
 package com.example.ottot.mineseeker;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -9,6 +11,7 @@ import android.widget.Button;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class main_Game extends AppCompatActivity {
     private table game_data;
@@ -16,8 +19,9 @@ public class main_Game extends AppCompatActivity {
     private int tableRow;
     private int numOfMine;
     private int timePlayed;
-    private int bestScr;
+    private int bestScr=0;
     private int guessed;
+    private int scanTime;
     private int currentScr = 0;
 
     private Button mine_btns[][];
@@ -35,6 +39,9 @@ public class main_Game extends AppCompatActivity {
         numOfMine = decodeMineC(mineC);
         timePlayed = passedInData.getIntExtra("time",0);
         bestScr = passedInData.getIntExtra("scr",0);
+
+        timePlayed++;
+
         dimensionGenerate(dimC);
 
         mineFieldGenerate();
@@ -57,11 +64,12 @@ public class main_Game extends AppCompatActivity {
     }
 
     private void mineFieldGenerate() {
-
         TableLayout mineField = (TableLayout)findViewById(R.id.mineField);
-        updateUI();
         game_data = new table(tableRow,tableCol,numOfMine);
+        table game_data_OG = game_data;
         mine_btns = new Button[tableRow][tableCol];
+        updateUI();
+
 
         for (int i = 0;i<tableRow;i++){
             TableRow newRow = new TableRow(this);
@@ -95,20 +103,71 @@ public class main_Game extends AppCompatActivity {
         }
     }
 
-    private void mineGuess(int row,int col){
-        if (game_data.guessMine(row,col)==1){
-            mine_btns[row][col].setBackgroundResource(mine_icon_ID);
-            guessed++;
+    private void mineGuess(int row,int col) {
+        if (game_data.getRemainScanTimes() > 0) {
+            if (game_data.guessMine(row, col) == 1) {
+                game_data.clickOnButton(row,col);
+                mine_btns[row][col].setBackgroundResource(mine_icon_ID);
+                guessed++;
+                currentScr += 100;
+                refreshTable();
+                updateUI();
+            }
+            else{
+                if (game_data.buttonIsClicked(row,col) == 0 && currentScr>20) {
+                    currentScr -= 20;
+                    game_data.clickOnButton(row,col);
+
+                }
+                else if (game_data.buttonIsClicked(row,col) == 0 && currentScr <=20){
+                    currentScr = 0;
+                    game_data.clickOnButton(row,col);
+                }
+                refreshTable();
+                updateUI();
+            }
+            if (guessed == numOfMine){
+                refreshTableWin();
+                Toast.makeText(main_Game.this, getString(R.string.youWin), Toast.LENGTH_SHORT).show();
+                finish();
+            }
         }
-        else
-            mine_btns[row][col].setText(""+game_data.numOfMines_at(row,col));
-        updateUI();
+        else{
+            new AlertDialog.Builder(main_Game.this)
+                    .setTitle("Out of Scan times")
+                    .setMessage(R.string.inAppPurchase)
+                    .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            game_data.addMoreTime();
+                            updateUI();
+                        }
+                    })
+                    .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.cancel();
+                            Toast.makeText(main_Game.this, getString(R.string.poorGuy), Toast.LENGTH_SHORT).show();
+                            finish();
+                        }
+                    })
+                    .show();
+        }
     }
 
     private void updateUI() {
         TextView foundMine = (TextView)findViewById(R.id.found_mine);
-        foundMine.setText("You Have found " + guessed + " out of " + numOfMine + " mines");
+        foundMine.setText(guessed + " / " + numOfMine + " mines found");
 
+        TextView currScore = (TextView)findViewById(R.id.scoreBoard);
+        currScore.setText("Score :" + currentScr);
+
+        TextView bestScore = (TextView)findViewById(R.id.BestScrHis);
+        refreshNewScr();
+        bestScore.setText("Best Score:" + bestScr);
+
+        TextView RemainScanTime = (TextView)findViewById(R.id.scanTimes);
+        RemainScanTime.setText("Remaining Scan: " + game_data.getRemainScanTimes());
     }
 
     private void dimensionGenerate(int Dcode) {
@@ -118,7 +177,7 @@ public class main_Game extends AppCompatActivity {
         }
         else if (Dcode == 1){
             tableRow = 5;
-            tableCol = 7;
+            tableCol = 8;
         }
         else if (Dcode == 2){
             tableRow = 6;
@@ -138,6 +197,28 @@ public class main_Game extends AppCompatActivity {
         }
     }
 
+    public void refreshTable(){
+        for (int i = 0; i < tableRow; i++){
+            for (int j = 0; j < tableCol; j++){
+                if (game_data.getBlock(i,j) == 2 ){
+                    mine_btns[i][j].setText("" + game_data.numOfMines_at(i, j));
+                }
+            }
+        }
+    }
+    public void refreshNewScr(){
+        if (currentScr > bestScr){
+            bestScr = currentScr;
+            //Toast.makeText(main_Game.this, getString(R.string.newRecord),Toast.LENGTH_SHORT).show();
+        }
+    }
+    public void refreshTableWin(){
+        for (int i = 0; i < tableRow; i++){
+            for (int j = 0; j < tableCol; j++){
+                    mine_btns[i][j].setText("" + game_data.numOfMines_at(i, j));
+                }
+            }
+        }
     public static Intent makeIntent(Context context){
         return new Intent(context, main_Game.class);
     }
