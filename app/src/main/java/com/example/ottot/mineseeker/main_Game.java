@@ -1,5 +1,6 @@
 package com.example.ottot.mineseeker;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -21,7 +22,6 @@ public class main_Game extends AppCompatActivity {
     private int timePlayed;
     private int bestScr=0;
     private int guessed;
-    private int scanTime;
     private int currentScr = 0;
 
     private Button mine_btns[][];
@@ -133,6 +133,8 @@ public class main_Game extends AppCompatActivity {
             }
         }
         else{
+            refreshNewScr();
+            updateUI();
             new AlertDialog.Builder(main_Game.this)
                     .setTitle("Out of Scan times")
                     .setMessage(R.string.inAppPurchase)
@@ -163,11 +165,16 @@ public class main_Game extends AppCompatActivity {
         currScore.setText("Score :" + currentScr);
 
         TextView bestScore = (TextView)findViewById(R.id.BestScrHis);
-        refreshNewScr();
         bestScore.setText("Best Score:" + bestScr);
 
         TextView RemainScanTime = (TextView)findViewById(R.id.scanTimes);
         RemainScanTime.setText("Remaining Scan: " + game_data.getRemainScanTimes());
+
+        Intent gameResult = new Intent();
+        gameResult.putExtra("bestScore",bestScr);
+        gameResult.putExtra("timesPlay",timePlayed);
+        setResult(Activity.RESULT_OK,gameResult);
+
     }
 
     private void dimensionGenerate(int Dcode) {
@@ -209,7 +216,7 @@ public class main_Game extends AppCompatActivity {
     public void refreshNewScr(){
         if (currentScr > bestScr){
             bestScr = currentScr;
-            //Toast.makeText(main_Game.this, getString(R.string.newRecord),Toast.LENGTH_SHORT).show();
+            Toast.makeText(main_Game.this, getString(R.string.newRecord),Toast.LENGTH_SHORT).show();
         }
     }
     public void refreshTableWin(){

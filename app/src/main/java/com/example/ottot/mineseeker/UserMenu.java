@@ -2,7 +2,9 @@ package com.example.ottot.mineseeker;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Resources;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -10,7 +12,13 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+
 import org.w3c.dom.Text;
+
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.List;
 
 public class UserMenu extends AppCompatActivity {//this is the actual main activity
     //check out table.java
@@ -20,13 +28,13 @@ public class UserMenu extends AppCompatActivity {//this is the actual main activ
     private static int TimePlayed;
     private static int[] BestScores = new int[num_of_dim];
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_menu);
 
         //initialize table data with default values
-
         TimePlayed=0;
         BestScores[dim_code]=0;
         startGame();
@@ -39,7 +47,10 @@ public class UserMenu extends AppCompatActivity {//this is the actual main activ
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         switch (requestCode) {
             case 1:
+                BestScores[dim_code] = data.getIntExtra("bestScore",0);
 
+                TimePlayed = data.getIntExtra("timesPlay",TimePlayed);
+                showInfo();
                 break;
             case 2:
                 if (resultCode==RESULT_CANCELED){
@@ -121,11 +132,36 @@ public class UserMenu extends AppCompatActivity {//this is the actual main activ
 //            BestScores[i] = 0;
 //        }
         BestScores[dim_code]=0;
+
     }
+
+//    public void ChangePref(int[] BestScore){
+//        Array.toString
+//        SharedPreferences allScoresRef = PreferenceManager.getDefaultSharedPreferences(this.getApplicationContext());
+//        SharedPreferences.Editor allScoresRefEditor = allScoresRef.edit();
+//        Gson gson = new Gson();
+//        String new_allScoreList = gson.toJson(strBestScore);
+//        allScoresRefEditor.putString("new_allPots", new_allScoreList);
+//        allScoresRefEditor.apply();
+//    }
+//    public int[] GetPref(){
+//        SharedPreferences appSharedPrefs = PreferenceManager.getDefaultSharedPreferences(this.getApplicationContext());
+//        Gson gson = new Gson();
+//        String new_allScoreList = appSharedPrefs.getString("new_allPots", "");
+//        String[] new_allScore = gson.fromJson(new_allScoreList, String[].class);
+//        int[] inNewScore = new int[new_allScore.length];
+//
+//        for (int i = 0; i<new_allScore.length;i++){
+//            inNewScore[i] = Integer.parseInt(new_allScore[i]);
+//        }
+//        return inNewScore;
+//    }
 
     public static Intent makeIntent(Context context){
         return new Intent(context, UserMenu.class);
     }
+
+
 
 
 }
