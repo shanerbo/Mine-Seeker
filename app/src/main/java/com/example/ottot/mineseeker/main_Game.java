@@ -83,10 +83,12 @@ public class main_Game extends AppCompatActivity {
                 newButton.setPadding(0,0,0,0);
                 newRow.addView(newButton);
                 mine_btns[i][j] = newButton;
+                //set i j location for mine;
                 newButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         mineGuess(FINALi,FINALj);
+                        //FINALi FINALj is the location of mine
                     }
                 });
             }
@@ -105,7 +107,7 @@ public class main_Game extends AppCompatActivity {
 
     private void updateUI() {
         TextView foundMine = (TextView)findViewById(R.id.found_mine);
-        foundMine.setText("You Have found " + guessed + " out of " + game_data.getNumOfMines() + " mines");
+        foundMine.setText("You Have found " + guessed + " out of " + numOfMine + " mines");
 
     }
 

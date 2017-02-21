@@ -14,12 +14,12 @@ public class table {//use tableTest to see what it does
     private int[] mineOfEachCols;
 
 
-
     //initialization functions
     public table(int tableRows, int tableCols,int num_Mine) {
         this.tableCols = tableCols;
         this.tableRows = tableRows;
         this.numOfMines = num_Mine;
+        int tempNumOfMines = numOfMines;
         allBlocks = new int[tableRows][tableCols];
         generateMines();
         mineOfEachCols = new int[tableCols];
@@ -27,10 +27,10 @@ public class table {//use tableTest to see what it does
         searchMines();
     }
 
-
     private void generateMines(){
         Random rg = new Random();
         int i = 0;
+
         while (i<numOfMines){
             int randRow = rg.nextInt(tableRows);
             int randCol = rg.nextInt(tableCols);
@@ -57,7 +57,8 @@ public class table {//use tableTest to see what it does
     //User interaction functions
     //called when user taps a block
     public int guessMine(int rowIndex, int colIndex){ //pass in the coordinate of the guessed block, determines if it's a hit or miss
-        if (getBlock(rowIndex,colIndex)==1){
+        if ((getBlock(rowIndex, colIndex) == 1) ){
+            allBlocks[rowIndex][colIndex] = 0;//once a mine is detected change the value back to 0;
             mineOfEachRows[rowIndex]--;
             mineOfEachCols[colIndex]--;
             numOfMines --;
