@@ -45,6 +45,7 @@ public class main_Game extends AppCompatActivity {
         dimensionGenerate(dimC);
 
         mineFieldGenerate();
+        setResult(RESULT_CANCELED);
     }
 
     private int decodeMineC(int mineC) {//0 = 6, 1 = 10, 2 = 15, 3 = 25, 4 = 35
@@ -104,31 +105,29 @@ public class main_Game extends AppCompatActivity {
 
     private void mineGuess(int row,int col) {
         if (game_data.getRemainScanTimes() > 0) {
-            int resultCode = game_data.guessMine(row,col);
-            if (resultCode == 1) {
-                game_data.clickOnButton(row,col);
-                mine_btns[row][col].setBackgroundResource(mine_icon_ID);
-                guessed++;
-                currentScr += 100;
-                updateUI();
-            }
-            else if(resultCode==0||resultCode==2) {
-                if (resultCode==0){
-
-                }
-                if (currentScr > 20) {
-                    currentScr -= 20;
+            int resultCode = game_data.guessMine(row, col);
+            switch (resultCode) {
+                case (0):
                     game_data.clickOnButton(row, col);
-
-                } else if (currentScr <= 20) {
-                    currentScr = 0;
+                    scrDeduct();
+                    refreshABtn(row,col);
+                    break;
+                case (1):
+                    mine_btns[row][col].setBackgroundResource(mine_icon_ID);
+                    guessed++;
+                    currentScr += 100;
+                    updateUI();
+                    break;
+                case (2):
                     game_data.clickOnButton(row, col);
-                }
-                refreshTable();
-                updateUI();
-
+                    scrDeduct();
+                    refreshABtn(row,col);
+                    break;
             }
-            if (guessed == numOfMine){
+            refreshTable();
+            updateUI();
+
+            if (guessed == numOfMine) {
                 refreshTableWin();
                 Toast.makeText(main_Game.this, getString(R.string.youWin), Toast.LENGTH_SHORT).show();
                 returnToMenu();
@@ -158,6 +157,14 @@ public class main_Game extends AppCompatActivity {
                     .show();
         }
 
+    }
+
+    private void scrDeduct() {
+        if (currentScr>=20){
+            currentScr-=20;
+        }
+        else
+            currentScr=0;
     }
 
     private void updateUI() {
@@ -218,7 +225,7 @@ public class main_Game extends AppCompatActivity {
     public void refreshTable(){
         for (int i = 0; i < tableRow; i++){
             for (int j = 0; j < tableCol; j++){
-                if (game_data.getBlock(i,j) == 2){
+                if (game_data.getBlock(i,j) == 3){
                     mine_btns[i][j].setText("" + game_data.numOfMines_at(i, j));
                 }
             }

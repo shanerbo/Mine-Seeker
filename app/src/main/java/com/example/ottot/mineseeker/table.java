@@ -74,6 +74,7 @@ public class table {//use tableTest to see what it does
         }
         else if(getBlock(rowIndex,colIndex)==2){//2 means a found already
             scanTimes--;
+            allBlocks[rowIndex][colIndex]=3;
             return 2;
         }
         return 0;
