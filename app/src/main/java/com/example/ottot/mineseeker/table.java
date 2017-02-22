@@ -9,7 +9,6 @@ public class table {//use tableTest to see what it does
     private int tableCols; //width of the table, x value
     private int tableRows; //height of the table, y value
     private int[][] allBlocks;
-    private int[][] checkClicked;
     private int numOfMines; //total number of mines, set by user
     private int[] mineOfEachRows;
     private int[] mineOfEachCols;
@@ -22,7 +21,6 @@ public class table {//use tableTest to see what it does
         this.tableRows = tableRows;
         this.numOfMines = num_Mine;
         allBlocks = new int[tableRows][tableCols];
-        checkClicked = new int[tableRows][tableCols];
         scanTimes = (int)(num_Mine + 0.35*tableCols*tableRows);
         generateMines();
         mineOfEachCols = new int[tableCols];
@@ -143,16 +141,6 @@ public class table {//use tableTest to see what it does
 
     public int getNumOfMines() {
         return numOfMines;
-    }
-
-    public void clickOnButton(int row, int col) {
-        checkClicked[row][col]=1;
-        return;
-
-    }
-
-    public int buttonIsClicked(int row, int col) {
-        return checkClicked[row][col];
     }
 
     //-----------------------------------------

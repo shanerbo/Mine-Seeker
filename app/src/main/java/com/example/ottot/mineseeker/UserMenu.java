@@ -83,8 +83,6 @@ public class UserMenu extends AppCompatActivity {//this is the actual main activ
             @Override
             public void onClick(View v) {
                 Intent game_Start = main_Game.makeIntent(UserMenu.this);
-                final MediaPlayer openingMusic = MediaPlayer.create(UserMenu.this,R.raw.tada);
-                openingMusic.start();
                 game_Start.putExtra("dimCode",dim_code);
                 game_Start.putExtra("mineCode",mine_code);
                 game_Start.putExtra("time",TimePlayed);

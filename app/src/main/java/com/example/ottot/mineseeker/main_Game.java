@@ -43,6 +43,7 @@ public class main_Game extends AppCompatActivity {
         dimensionGenerate(dimC);
         mineFieldGenerate();
         setResult(RESULT_CANCELED);
+        playSound(R.raw.tada);
     }
 
     private int decodeMineC(int mineC) {//0 = 6, 1 = 10, 2 = 15, 3 = 25, 4 = 35
@@ -106,7 +107,7 @@ public class main_Game extends AppCompatActivity {
             int resultCode = game_data.guessMine(row, col);
             switch (resultCode) {
                 case (0):
-                    game_data.clickOnButton(row, col);
+
                     scrDeduct();
                     refreshABtn(row,col);
                     break;
@@ -114,13 +115,14 @@ public class main_Game extends AppCompatActivity {
                     mine_btns[row][col].setBackgroundResource(mine_icon_ID);
                     guessed++;
                     currentScr += 100;
-                    final MediaPlayer foundMusic = MediaPlayer.create(main_Game.this,R.raw.ohyear);
-                    foundMusic.start();
+                    if (guessed!=numOfMine){
+                        playSound(R.raw.ohyear);
+                    }
                     Vibrate_found();
                     updateUI();
                     break;
                 case (2):
-                    game_data.clickOnButton(row, col);
+
                     scrDeduct();
                     refreshABtn(row,col);
                     break;
@@ -134,6 +136,7 @@ public class main_Game extends AppCompatActivity {
                 refreshTableWin();
                 refreshNewScr();
                 prepareIntent();
+                playSound(R.raw.applause);
                 new AlertDialog.Builder(main_Game.this)
                         .setTitle(R.string.youWin)
                         .setMessage(R.string.backtotheMenu)
@@ -156,6 +159,7 @@ public class main_Game extends AppCompatActivity {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             game_data.addMoreTime();
+                            Toast.makeText(main_Game.this,R.string.freeScan, Toast.LENGTH_SHORT).show();
                             updateUI();
                         }
                     })
@@ -172,6 +176,16 @@ public class main_Game extends AppCompatActivity {
 
     }
 
+    private void playSound(int soundToplay){
+        final MediaPlayer foundMusic = MediaPlayer.create(main_Game.this,soundToplay);
+        foundMusic.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mp) {
+                mp.release();
+            }
+        });
+        foundMusic.start();
+    }
     private void prepareIntent() {
         Intent gameResult = new Intent();
         gameResult.putExtra("bestScore",bestScr);
@@ -203,9 +217,7 @@ public class main_Game extends AppCompatActivity {
 
 
     private void returnToMenu(){
-        final MediaPlayer allFOund = MediaPlayer.create(main_Game.this,R.raw.applause);
 
-        allFOund.start();
         prepareIntent();
         finish();
     }
@@ -260,7 +272,7 @@ public class main_Game extends AppCompatActivity {
         for (int i = 0; i < tableRow; i++){
             for (int j = 0; j < tableCol; j++){
                     mine_btns[i][j].setBackgroundResource(happy_finish_ID);
-                    mine_btns[i][j].setText("" );
+                    //mine_btns[i][j].setText("");
                 }
             }
         }
