@@ -71,7 +71,7 @@ public class table {//use tableTest to see what it does
             allBlocks[rowIndex][colIndex] = 3;//3 means an empty field already scanned, nothing can wil be done
             return 0;
         }
-        else if(getBlock(rowIndex,colIndex)==2){//2 means a found already
+        else if(getBlock(rowIndex,colIndex)==2){//2 means a mine found already
             scanTimes--;
             allBlocks[rowIndex][colIndex]=4;
             return 2;
@@ -81,9 +81,6 @@ public class table {//use tableTest to see what it does
         }
         else if (getBlock(rowIndex,colIndex)==4){//4 means a mine already scanned
             return 4;
-        }
-        else if (getBlock(rowIndex,colIndex)==5){//5 means frozen
-            return 5;
         }
         return 0;
     }

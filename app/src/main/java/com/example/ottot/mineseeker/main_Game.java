@@ -131,6 +131,8 @@ public class main_Game extends AppCompatActivity {
                     break;
                 case (4):
                     break;
+                case (5):
+                    break;
             }
             refreshTable();
             updateUI();
@@ -143,7 +145,6 @@ public class main_Game extends AppCompatActivity {
                 android.support.v4.app.FragmentManager manager = getSupportFragmentManager();
                 Congrats congrats = new Congrats();
                 prepareIntent();
-                frezetheField();
                 refreshTableWin();
                 congrats.show(manager,"congrats");
             }
@@ -273,23 +274,19 @@ public class main_Game extends AppCompatActivity {
         for (int i = 0; i < tableRow; i++) {
             for (int j = 0; j < tableCol; j++) {
                 int code = game_data.getBlock(i, j);
-                if (code == 5) {
+                if (code == 0 ){
+                    game_data.setBlock(i,j,3);
+                }
+                if (code == 2){
+                    game_data.setBlock(i,j,4);
+                }
+                if (code == 3) {
                     mine_btns[i][j].setBackgroundResource(frozen_icon);
                 }
             }
         }
     }
 
-    private void frezetheField() {
-        for (int i = 0; i < tableRow; i++) {
-            for (int j = 0; j < tableCol; j++) {
-                int code = game_data.getBlock(i, j);
-                if (code == 0) {
-                    game_data.setBlock(i,j,5);
-                }
-            }
-        }
-    }
 
     public void Vibrate_found(){
         Vibrator mineFound = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
