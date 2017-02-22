@@ -1,4 +1,5 @@
 Mine Seeker - Beta phrase
+Now refreshed as Zombie Digger!
 Zhixuan(Otto) Hu
 Erbo Shen
 
