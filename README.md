@@ -9,7 +9,8 @@ All general requirements
 Sound effects when the game starts, mine hit and game finishes.
 High-Scores challenges
 Scores for every dimension are preserved between launches, as well as dimension last played, played time
-
+If the player runs out of scan chance, he can choose to purchase more (not really at the moment, we just give free scans if he wanted).
+Originally created launcher icon
 
 Reference
 mine icon:
