@@ -1,4 +1,15 @@
-Mine Seeker - In development
+Mine Seeker - Beta phrase
+Zhixuan(Otto) Hu
+Erbo Shen
+
+
+The game has passed the acceptance tests and running properly.
+Features:
+All general requirements
+Sound effects when the game starts, mine hit and game finishes.
+High-Scores challenges
+Scores for every dimension are preserved between launches, as well as dimension last played, played time
+
 
 Reference
 mine icon:

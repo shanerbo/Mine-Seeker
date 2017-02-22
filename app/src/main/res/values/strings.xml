@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">MineSeeker</string>
     <string name="welcome">Welcome to the Mine Seeker game</string>
-    <string name="Authors">By OttoHu \n Erbo Shen</string>
+    <string name="Authors">By OttoHu \nErbo Shen</string>
     <string name="Enter">Enter Game</string>
     <string name="Menu_title">Main Menu</string>
     <string name="start">PLAY!</string>
@@ -11,7 +11,7 @@
     <string name="board_size">Board size:</string>
     <string name="num_mines"># Mines:</string>
     <string name="time_erase">Erase times played</string>
-    <string name="helpText">Tap on the block where you think a mine is hidden at. \nThe block will tell you if it has a mine, or the number of mines in the same row and column. \nThe goal is to find all mines in the table. \nGood luck!\n
+    <string name="helpText">Tap on the block where you think a mine could be hidden at.\nThe block will tell you if it has a mine, or the number of mines in the same row and column.\nThe goal is to find all mines in the field. \nGood luck!\n
     </string>
     <string name="Return">RETURN</string>
     <string name="Save">SAVE</string>
@@ -27,7 +27,7 @@
     </string>
     <string name="newRecord">New Record Achieved
     </string>
-    <string name="youWin">You found all of the mines, Congratulation!
+    <string name="youWin">You found all of the mines, Congratulations!
     </string>
     <string name="initNum">0</string>
     <string-array name="dimDD">

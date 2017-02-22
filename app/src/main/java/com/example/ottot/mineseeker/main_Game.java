@@ -33,8 +33,6 @@ public class main_Game extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_game);
-        final MediaPlayer BGM = MediaPlayer.create(main_Game.this,R.raw.lastwar);
-        BGM.start();
         Intent passedInData = getIntent();
         int dimC= passedInData.getIntExtra("dimCode",0);
         int mineC = passedInData.getIntExtra("mineCode",0);
@@ -135,6 +133,7 @@ public class main_Game extends AppCompatActivity {
             if (guessed == numOfMine) {
                 refreshTableWin();
                 refreshNewScr();
+                prepareIntent();
                 new AlertDialog.Builder(main_Game.this)
                         .setTitle(R.string.youWin)
                         .setMessage(R.string.backtotheMenu)
@@ -204,9 +203,9 @@ public class main_Game extends AppCompatActivity {
 
 
     private void returnToMenu(){
-        final MediaPlayer byebye = MediaPlayer.create(main_Game.this,R.raw.goodbye);
+        final MediaPlayer allFOund = MediaPlayer.create(main_Game.this,R.raw.applause);
 
-        byebye.start();
+        allFOund.start();
         prepareIntent();
         finish();
     }

@@ -35,14 +35,12 @@ public class options_page extends AppCompatActivity {
         dimSpinner.setAdapter(dimAdapter);
         mineSpinner.setAdapter(mineAdapter);
 
+
+
         dimSpinner.setSelection(passedIn.getIntExtra("table_dim",0));
         mineSpinner.setSelection(passedIn.getIntExtra("numberMine",0));
 
         final Intent result = new Intent();
-
-        int dim = dimSpinner.getSelectedItemPosition();
-        int mine = mineSpinner.getSelectedItemPosition();
-
 
 
         Button done = (Button) findViewById(R.id.opt_ret_btn);
@@ -77,9 +75,8 @@ public class options_page extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 result.putExtra("resetTimeOrNot",1);
-                Toast.makeText(options_page.this,"You have erased the time played",Toast.LENGTH_SHORT).show();
+                Toast.makeText(options_page.this,"You have erased the time you have played played",Toast.LENGTH_SHORT).show();
                 setResult(Activity.RESULT_OK,result);
-                finish();
             }
         });
         Button eraseScore = (Button) findViewById(R.id.clearBestScore);
@@ -87,9 +84,8 @@ public class options_page extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 result.putExtra("resetScoreOrNot",1);
-                Toast.makeText(options_page.this,"You have erased the best score",Toast.LENGTH_SHORT).show();
+                Toast.makeText(options_page.this,"You have erased best scores",Toast.LENGTH_SHORT).show();
                 setResult(Activity.RESULT_OK,result);
-                finish();
             }
         });
         setResult(Activity.RESULT_CANCELED,result);
