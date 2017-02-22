@@ -65,6 +65,7 @@ public class table {//use tableTest to see what it does
             mineOfEachCols[colIndex]--;
             numOfMines --;
             allBlocks[rowIndex][colIndex] = 2;
+            scanTimes--;
             return 1;
         }
         else if(getBlock(rowIndex,colIndex)==0){//0 means a miss

@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.media.MediaPlayer;
+import android.os.Vibrator;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -23,7 +25,6 @@ public class main_Game extends AppCompatActivity {
     private int bestScr=0;
     private int guessed;
     private int currentScr = 0;
-
     private Button mine_btns[][];
     private int mine_icon_ID = R.mipmap.mine_icon;
     private int happy_finish_ID = R.mipmap.happy_end;
@@ -32,18 +33,16 @@ public class main_Game extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_game);
-
+        final MediaPlayer BGM = MediaPlayer.create(main_Game.this,R.raw.lastwar);
+        BGM.start();
         Intent passedInData = getIntent();
         int dimC= passedInData.getIntExtra("dimCode",0);
         int mineC = passedInData.getIntExtra("mineCode",0);
         numOfMine = decodeMineC(mineC);
         timePlayed = passedInData.getIntExtra("time",0);
         bestScr = passedInData.getIntExtra("scr",0);
-
         timePlayed++;
-
         dimensionGenerate(dimC);
-
         mineFieldGenerate();
         setResult(RESULT_CANCELED);
     }
@@ -96,6 +95,7 @@ public class main_Game extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
                         mineGuess(FINALi,FINALj);
+                        Vibrate_click();
                         //FINALi FINALj is the location of mine
                     }
                 });
@@ -116,6 +116,9 @@ public class main_Game extends AppCompatActivity {
                     mine_btns[row][col].setBackgroundResource(mine_icon_ID);
                     guessed++;
                     currentScr += 100;
+                    final MediaPlayer foundMusic = MediaPlayer.create(main_Game.this,R.raw.ohyear);
+                    foundMusic.start();
+                    Vibrate_found();
                     updateUI();
                     break;
                 case (2):
@@ -131,8 +134,7 @@ public class main_Game extends AppCompatActivity {
 
             if (guessed == numOfMine) {
                 refreshTableWin();
-                Toast.makeText(main_Game.this, getString(R.string.youWin), Toast.LENGTH_SHORT).show();
-
+                refreshNewScr();
                 new AlertDialog.Builder(main_Game.this)
                         .setTitle(R.string.youWin)
                         .setMessage(R.string.backtotheMenu)
@@ -140,12 +142,6 @@ public class main_Game extends AppCompatActivity {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 returnToMenu();
-                            }
-                        })
-                        .setNegativeButton("No", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                prepareIntent();
                             }
                         })
                         .show();
@@ -193,7 +189,6 @@ public class main_Game extends AppCompatActivity {
     }
 
     private void updateUI() {
-        refreshNewScr();
         TextView foundMine = (TextView)findViewById(R.id.found_mine);
         foundMine.setText(guessed + " / " + numOfMine + " mines found");
 
@@ -209,6 +204,9 @@ public class main_Game extends AppCompatActivity {
 
 
     private void returnToMenu(){
+        final MediaPlayer byebye = MediaPlayer.create(main_Game.this,R.raw.goodbye);
+
+        byebye.start();
         prepareIntent();
         finish();
     }
@@ -263,9 +261,18 @@ public class main_Game extends AppCompatActivity {
         for (int i = 0; i < tableRow; i++){
             for (int j = 0; j < tableCol; j++){
                     mine_btns[i][j].setBackgroundResource(happy_finish_ID);
+                    mine_btns[i][j].setText("" );
                 }
             }
         }
+    public void Vibrate_found(){
+        Vibrator mineFound = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+        mineFound.vibrate(500);
+    }
+    public void Vibrate_click(){
+        Vibrator mineFound = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+        mineFound.vibrate(100);
+    }
     public static Intent makeIntent(Context context){
         return new Intent(context, main_Game.class);
     }

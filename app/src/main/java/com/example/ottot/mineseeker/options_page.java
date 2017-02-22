@@ -78,6 +78,8 @@ public class options_page extends AppCompatActivity {
             public void onClick(View v) {
                 result.putExtra("resetTimeOrNot",1);
                 Toast.makeText(options_page.this,"You have erased the time played",Toast.LENGTH_SHORT).show();
+                setResult(Activity.RESULT_OK,result);
+                finish();
             }
         });
         Button eraseScore = (Button) findViewById(R.id.clearBestScore);
@@ -86,6 +88,8 @@ public class options_page extends AppCompatActivity {
             public void onClick(View v) {
                 result.putExtra("resetScoreOrNot",1);
                 Toast.makeText(options_page.this,"You have erased the best score",Toast.LENGTH_SHORT).show();
+                setResult(Activity.RESULT_OK,result);
+                finish();
             }
         });
         setResult(Activity.RESULT_CANCELED,result);

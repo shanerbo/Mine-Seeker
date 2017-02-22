@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
+import android.media.MediaPlayer;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -37,6 +38,7 @@ public class UserMenu extends AppCompatActivity {//this is the actual main activ
         //initialize table data with default values
         TimePlayed=0;
         BestScores[dim_code]=0;
+        GetPref();
         startGame();
         optionMenu();
         helpMenu();
@@ -50,6 +52,7 @@ public class UserMenu extends AppCompatActivity {//this is the actual main activ
                 if (resultCode==RESULT_CANCELED)return;
                 BestScores[dim_code] = data.getIntExtra("bestScore",0);
                 TimePlayed = data.getIntExtra("timesPlay",TimePlayed);
+                savePref();
                 showInfo();
                 break;
             case 2:
@@ -58,12 +61,15 @@ public class UserMenu extends AppCompatActivity {//this is the actual main activ
                 }
                 if (data.getIntExtra("resetTimeOrNot", 0) == 1) {
                     resetPlaytime();
+                    savePref();
                 }
                 if (data.getIntExtra("resetScoreOrNot", 0) == 1) {
                     resetBestScore();
+                    savePref();
                 }
                 dim_code = data.getIntExtra("dimension",0);
                 mine_code = data.getIntExtra("mineNum",0);
+                savePref();
                 showInfo();
                 break;
         }
@@ -77,6 +83,8 @@ public class UserMenu extends AppCompatActivity {//this is the actual main activ
             @Override
             public void onClick(View v) {
                 Intent game_Start = main_Game.makeIntent(UserMenu.this);
+                final MediaPlayer openingMusic = MediaPlayer.create(UserMenu.this,R.raw.tada);
+                openingMusic.start();
                 game_Start.putExtra("dimCode",dim_code);
                 game_Start.putExtra("mineCode",mine_code);
                 game_Start.putExtra("time",TimePlayed);
@@ -113,6 +121,7 @@ public class UserMenu extends AppCompatActivity {//this is the actual main activ
         });
     }
     private void showInfo() {
+        GetPref();
         TextView timePlay = (TextView) findViewById(R.id.TimePlayed);
         timePlay.setText(""+TimePlayed);
         TextView bestScore = (TextView) findViewById(R.id.BestScore);
@@ -138,8 +147,14 @@ public class UserMenu extends AppCompatActivity {//this is the actual main activ
         SharedPreferences.Editor PrefEditor = dataTosave.edit();
         PrefEditor.putInt("dim_code",dim_code);
         PrefEditor.putInt("mine_code",mine_code);
-        String scores_into_string = BestScores.toString();
-        PrefEditor.putString("Best Scores",scores_into_string);
+        PrefEditor.putInt("timePlay",TimePlayed);
+        PrefEditor.putInt("dim0",BestScores[0]);
+        PrefEditor.putInt("dim1",BestScores[1]);
+        PrefEditor.putInt("dim2",BestScores[2]);
+        PrefEditor.putInt("dim3",BestScores[3]);
+        PrefEditor.putInt("dim4",BestScores[4]);
+        PrefEditor.putInt("dim5",BestScores[5]);
+        PrefEditor.apply();
 
     }
     public void GetPref(){
@@ -147,12 +162,14 @@ public class UserMenu extends AppCompatActivity {//this is the actual main activ
         if (dataToGet==null)return;
         dim_code = dataToGet.getInt("dim_code",0);
         mine_code = dataToGet.getInt("mine_code",0);
-        String scores_in_string = dataToGet.getString("Best Scores", null);
-        String splitor = scores_in_string.replaceAll("\\[|\\]|\\s", "");
-        String[] splited = splitor.split("\\,");
-        for (int i = 0; i< num_of_dim; i++){
-            BestScores[i]=Integer.parseInt(splited[i]);
-        }
+        TimePlayed = dataToGet.getInt("timePlay",0);
+        BestScores[0] = dataToGet.getInt("dim0",0);
+        BestScores[1] = dataToGet.getInt("dim1",0);
+        BestScores[2] = dataToGet.getInt("dim2",0);
+        BestScores[3] = dataToGet.getInt("dim3",0);
+        BestScores[4] = dataToGet.getInt("dim4",0);
+        BestScores[5] = dataToGet.getInt("dim5",0);
+
     }
 
     public static Intent makeIntent(Context context){
