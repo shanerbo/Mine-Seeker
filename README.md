@@ -13,9 +13,16 @@ If the player runs out of scan chance, he can choose to purchase more (not reall
 Originally created launcher icon
 
 Reference
-mine icon:
-https://www.google.ca/url?sa=i&rct=j&q=&esrc=s&source=images&cd=&ved=0ahUKEwjWkpn6k57SAhVP5mMKHZ8dCGIQjhwIBQ&url=http%3A%2F%2Fclipartist.net%2Fsvg%2Frg-1-24-cartoon-sea-mine-clipartist-net-2012-july-poster-art-clip-art-clipart-openclipart-org-scalable-vector-graphics-svg-public-domain-mugwump%2F&psig=AFQjCNFjOjLMTQFSNrlFLFijpkQPf51cow&ust=1487662266665335
-all mine secured icon:
-http://www.freeiconspng.com/png-images/happy-png
+welcome page:
+http://www.pngall.com/zombie-png
+help page@welcome page background:
+http://wallpapercave.com/graveyard-backgrounds
+Game icons:
+http://www.chickensmoothie.com/Forum/viewtopic.php?f=28&t=2672044
+http://plantsvszombies.wikia.com/wiki/File:Gargantuar_zonder_imp.png
+http://pvzcc.wikia.com/wiki/File:Golden_Shovel.png
+http://www.dfiles.me/crawling-zombie-png.html
+http://kyrios.org.ua/literature/pritchi-ta-istoriyi/15880-pritcha-ljudina-i-skarb.html
+http://plantsvszombies.wikia.com/wiki/Grave_(PvZ)
 All sound effect are from
 www.soundbible.com

@@ -1,6 +1,6 @@
 <resources>
-    <string name="app_name">MineSeeker</string>
-    <string name="welcome">Welcome to the Mine Seeker game</string>
+    <string name="app_name">Zombie Digger</string>
+    <string name="welcome">Welcome to the Zombie Digger game</string>
     <string name="Authors">By OttoHu \nErbo Shen</string>
     <string name="Enter">Enter Game</string>
     <string name="Menu_title">Main Menu</string>
@@ -11,7 +11,7 @@
     <string name="board_size">Board size:</string>
     <string name="num_mines"># Mines:</string>
     <string name="time_erase">Erase times played</string>
-    <string name="helpText">Tap on the block where you think a mine could be hidden at.\nThe block will tell you if it has a mine, or the number of mines in the same row and column.\nThe goal is to find all mines in the field. \nGood luck!\n
+    <string name="helpText">Find all zombies hiding in the field!\nTap to investigate a block\nThe zombie will be dug up, or the number of zombies in the same row and column will show.\nThe goal is to find all zombies in the field using the fewest scans. \nGood luck!\n
     </string>
     <string name="Return">RETURN</string>
     <string name="Save">SAVE</string>
@@ -38,7 +38,7 @@
         <item>5 rows by 12 cols</item>
         <item>6 rows by 15 cols</item>
     </string-array>
-    <string name="findIntro">You have found 0 out of 6 mines</string>
+    <string name="findIntro">0 out of 6 zombies</string>
     <string name="scrIntro">Scroe: 0</string>
     <string-array name="numMineDD">
         <item>6</item>
@@ -49,4 +49,7 @@
     </string-array>
     <string name="backtotheMenu">Do you wish to head back to the menu?</string>
     <string name="freeScan">10 free scans received</string>
+    <string name="website">http://www.cs.sfu.ca/CourseCentral/276/bfraser/index.html</string>
+    <string name="playerWin">Player Win a game</string>
+    <string name="aMem">GOTTA DIG THEM ALL!</string>
 </resources>

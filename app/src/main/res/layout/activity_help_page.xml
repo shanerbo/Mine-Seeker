@@ -24,24 +24,44 @@
         android:id="@+id/help_title" />
 
     <TextView
+        android:text="@string/website"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/course_website"
+        android:layout_alignTop="@+id/return_btn"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="28dp" />
+
+    <TextView
+        android:text="@string/Authors"
+        android:textColor="@android:color/white"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/authorInHelpPage"
+        android:layout_alignBottom="@+id/help_text"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <TextView
         android:text="@string/helpText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/help_title"
-        android:layout_alignLeft="@+id/help_title"
-        android:layout_alignStart="@+id/help_title"
-        android:layout_marginTop="22dp"
         android:textSize="19dp"
-        android:background="@drawable/shutterstock_102800648"
+        android:background="@drawable/helppage"
+        android:textColor="@android:color/white"
         android:id="@+id/help_text"
-        tools:textColor="@android:color/black" />
+        tools:textColor="@android:color/white"
+        android:layout_above="@+id/return_btn"
+        android:layout_alignLeft="@+id/help_title"
+        android:layout_alignStart="@+id/help_title" />
 
     <Button
         android:text="@string/Return"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:id="@+id/return_btn"
         android:layout_alignParentBottom="true"
         android:layout_alignLeft="@+id/help_text"
-        android:layout_alignStart="@+id/help_text"
-        android:id="@+id/return_btn" />
+        android:layout_alignStart="@+id/help_text" />
 </RelativeLayout>

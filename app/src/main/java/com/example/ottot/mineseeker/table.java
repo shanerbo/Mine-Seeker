@@ -68,16 +68,22 @@ public class table {//use tableTest to see what it does
         }
         else if(getBlock(rowIndex,colIndex)==0){//0 means a miss
             scanTimes--;
-            allBlocks[rowIndex][colIndex] = 3;//3 means an already scanned, nothing can wil be done
+            allBlocks[rowIndex][colIndex] = 3;//3 means an empty field already scanned, nothing can wil be done
             return 0;
         }
         else if(getBlock(rowIndex,colIndex)==2){//2 means a found already
             scanTimes--;
-            allBlocks[rowIndex][colIndex]=3;
+            allBlocks[rowIndex][colIndex]=4;
             return 2;
         }
         else if (getBlock(rowIndex,colIndex)==3){
             return 3;
+        }
+        else if (getBlock(rowIndex,colIndex)==4){//4 means a mine already scanned
+            return 4;
+        }
+        else if (getBlock(rowIndex,colIndex)==5){//5 means frozen
+            return 5;
         }
         return 0;
     }
@@ -116,7 +122,10 @@ public class table {//use tableTest to see what it does
     public int getBlock(int y, int x){
         return allBlocks[y][x];
     }
-
+    public void setBlock(int y, int x, int val){
+        allBlocks[y][x] = val;
+        return;
+    }
     public int getTableCols() {
         return tableCols;
     }

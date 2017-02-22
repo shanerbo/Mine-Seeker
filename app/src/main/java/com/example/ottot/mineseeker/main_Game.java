@@ -1,6 +1,7 @@
 package com.example.ottot.mineseeker;
 
 import android.app.Activity;
+import android.app.FragmentManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -26,8 +27,9 @@ public class main_Game extends AppCompatActivity {
     private int guessed;
     private int currentScr = 0;
     private Button mine_btns[][];
-    private int mine_icon_ID = R.mipmap.mine_icon;
-    private int happy_finish_ID = R.mipmap.happy_end;
+    private int mine_icon_ID = R.mipmap.zombie;
+    private int empty_field = R.mipmap.empty_field;
+    private int frozen_icon = R.mipmap.frozen_icon;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,6 +89,7 @@ public class main_Game extends AppCompatActivity {
                         1.0f)
                 );
                 newButton.setPadding(0,0,0,0);
+                newButton.setBackgroundResource(empty_field);
                 newRow.addView(newButton);
                 mine_btns[i][j] = newButton;
                 //set i j location for mine;
@@ -107,7 +110,6 @@ public class main_Game extends AppCompatActivity {
             int resultCode = game_data.guessMine(row, col);
             switch (resultCode) {
                 case (0):
-
                     scrDeduct();
                     refreshABtn(row,col);
                     break;
@@ -122,11 +124,12 @@ public class main_Game extends AppCompatActivity {
                     updateUI();
                     break;
                 case (2):
-
                     scrDeduct();
                     refreshABtn(row,col);
                     break;
                 case (3):
+                    break;
+                case (4):
                     break;
             }
             refreshTable();
@@ -137,16 +140,12 @@ public class main_Game extends AppCompatActivity {
                 refreshNewScr();
                 prepareIntent();
                 playSound(R.raw.applause);
-                new AlertDialog.Builder(main_Game.this)
-                        .setTitle(R.string.youWin)
-                        .setMessage(R.string.backtotheMenu)
-                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                returnToMenu();
-                            }
-                        })
-                        .show();
+                android.support.v4.app.FragmentManager manager = getSupportFragmentManager();
+                Congrats congrats = new Congrats();
+                prepareIntent();
+                frezetheField();
+                refreshTableWin();
+                congrats.show(manager,"congrats");
             }
         }
         else{
@@ -176,6 +175,8 @@ public class main_Game extends AppCompatActivity {
 
     }
 
+
+
     private void playSound(int soundToplay){
         final MediaPlayer foundMusic = MediaPlayer.create(main_Game.this,soundToplay);
         foundMusic.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
@@ -203,7 +204,7 @@ public class main_Game extends AppCompatActivity {
 
     private void updateUI() {
         TextView foundMine = (TextView)findViewById(R.id.found_mine);
-        foundMine.setText(guessed + " / " + numOfMine + " mines found");
+        foundMine.setText(guessed + " / " + numOfMine + " zombies dug");
 
         TextView currScore = (TextView)findViewById(R.id.scoreBoard);
         currScore.setText("Score :" + currentScr);
@@ -268,14 +269,28 @@ public class main_Game extends AppCompatActivity {
             Toast.makeText(main_Game.this, getString(R.string.newRecord),Toast.LENGTH_SHORT).show();
         }
     }
-    public void refreshTableWin(){
-        for (int i = 0; i < tableRow; i++){
-            for (int j = 0; j < tableCol; j++){
-                    mine_btns[i][j].setBackgroundResource(happy_finish_ID);
-                    //mine_btns[i][j].setText("");
+    public void refreshTableWin() {
+        for (int i = 0; i < tableRow; i++) {
+            for (int j = 0; j < tableCol; j++) {
+                int code = game_data.getBlock(i, j);
+                if (code == 5) {
+                    mine_btns[i][j].setBackgroundResource(frozen_icon);
                 }
             }
         }
+    }
+
+    private void frezetheField() {
+        for (int i = 0; i < tableRow; i++) {
+            for (int j = 0; j < tableCol; j++) {
+                int code = game_data.getBlock(i, j);
+                if (code == 0) {
+                    game_data.setBlock(i,j,5);
+                }
+            }
+        }
+    }
+
     public void Vibrate_found(){
         Vibrator mineFound = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
         mineFound.vibrate(500);
