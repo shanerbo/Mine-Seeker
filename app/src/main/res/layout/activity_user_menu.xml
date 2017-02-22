@@ -118,6 +118,7 @@
         android:id="@+id/imageView"
         android:layout_alignTop="@+id/BestScoreTittle"
         android:layout_alignLeft="@+id/main_menu"
-        android:layout_alignStart="@+id/main_menu" />
+        android:layout_alignStart="@+id/main_menu"
+        android:contentDescription="@string/zombieDes" />
 
 </RelativeLayout>
