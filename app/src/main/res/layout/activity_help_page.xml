@@ -33,13 +33,22 @@
         android:layout_alignParentEnd="true"
         android:layout_marginTop="28dp" />
 
+    <Button
+        android:text="@string/Return"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/return_btn"
+        android:layout_alignParentBottom="true"
+        android:layout_alignLeft="@+id/help_text"
+        android:layout_alignStart="@+id/help_text" />
+
     <TextView
         android:text="@string/Authors"
-        android:textColor="@android:color/white"
+        android:textColor="@android:color/black"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/authorInHelpPage"
-        android:layout_alignBottom="@+id/help_text"
+        android:layout_above="@+id/course_website"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
 
@@ -52,16 +61,7 @@
         android:textColor="@android:color/white"
         android:id="@+id/help_text"
         tools:textColor="@android:color/white"
-        android:layout_above="@+id/return_btn"
+        android:layout_above="@+id/authorInHelpPage"
         android:layout_alignLeft="@+id/help_title"
         android:layout_alignStart="@+id/help_title" />
-
-    <Button
-        android:text="@string/Return"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/return_btn"
-        android:layout_alignParentBottom="true"
-        android:layout_alignLeft="@+id/help_text"
-        android:layout_alignStart="@+id/help_text" />
 </RelativeLayout>

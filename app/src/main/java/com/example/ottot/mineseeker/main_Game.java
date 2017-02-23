@@ -17,6 +17,8 @@ import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.Random;
+
 public class main_Game extends AppCompatActivity {
     private table game_data;
     private int tableCol;
@@ -28,6 +30,10 @@ public class main_Game extends AppCompatActivity {
     private int currentScr = 0;
     private Button mine_btns[][];
     private int mine_icon_ID = R.mipmap.zombie;
+    private int zombie_icon2 = R.mipmap.zombie2;
+    private int zombie_icon3 = R.mipmap.zombie3;
+    private int zombie_icon4 = R.mipmap.zombie4;
+    private int[] zombie_collection = {mine_icon_ID,zombie_icon2,zombie_icon3,zombie_icon4};
     private int empty_field = R.mipmap.empty_field;
     private int frozen_icon = R.mipmap.frozen_icon;
 
@@ -106,6 +112,7 @@ public class main_Game extends AppCompatActivity {
     }
 
     private void mineGuess(int row,int col) {
+
         if (game_data.getRemainScanTimes() > 0) {
             int resultCode = game_data.guessMine(row, col);
             switch (resultCode) {
@@ -114,7 +121,8 @@ public class main_Game extends AppCompatActivity {
                     refreshABtn(row,col);
                     break;
                 case (1):
-                    mine_btns[row][col].setBackgroundResource(mine_icon_ID);
+                    Random rn = new Random();
+                    mine_btns[row][col].setBackgroundResource(zombie_collection[rn.nextInt(4)]);
                     guessed++;
                     currentScr += 100;
                     if (guessed!=numOfMine){

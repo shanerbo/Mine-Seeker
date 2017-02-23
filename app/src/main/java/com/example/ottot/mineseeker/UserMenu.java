@@ -60,11 +60,9 @@ public class UserMenu extends AppCompatActivity {//this is the actual main activ
                 }
                 if (data.getIntExtra("resetTimeOrNot", 0) == 1) {
                     resetPlaytime();
-                    savePref();
                 }
                 if (data.getIntExtra("resetScoreOrNot", 0) == 1) {
                     resetBestScore();
-                    savePref();
                 }
                 dim_code = data.getIntExtra("dimension",0);
                 mine_code = data.getIntExtra("mineNum",0);

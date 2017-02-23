@@ -6,12 +6,12 @@
     <TextView
         android:text="@string/aMem"
         android:layout_width="wrap_content"
-        android:textColor="@android:color/holo_blue_bright"
+        android:textColor="@android:color/holo_blue_dark"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
         android:id="@+id/textView"
-        android:textSize="24sp" />
+        android:textSize="23sp" />
 
     <ImageView
         android:layout_width="wrap_content"

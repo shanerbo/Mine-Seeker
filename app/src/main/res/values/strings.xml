@@ -11,7 +11,7 @@
     <string name="board_size">Board size:</string>
     <string name="num_mines"># Mines:</string>
     <string name="time_erase">Erase times played</string>
-    <string name="helpText">Find all zombies hiding in the field!\nTap to investigate a block\nThe zombie will be dug up, or the number of zombies in the same row and column will show.\nThe goal is to find all zombies in the field using the fewest scans. \nGood luck!\n
+    <string name="helpText">Find all zombies hiding in the field!\nTap to investigate a block:\nA zombie will be dug up, or the number of zombies in the same row and column will show.\nThe goal is to find all zombies in the field using the fewest scans. \nGood luck!\n
     </string>
     <string name="Return">RETURN</string>
     <string name="Save">SAVE</string>
