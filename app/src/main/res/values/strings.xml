@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Zombie Digger</string>
     <string name="welcome">Welcome to the Zombie Digger game</string>
+    <string name="startNotice">Hit the zombie real hard to enter</string>
     <string name="Authors">By OttoHu \nErbo Shen</string>
     <string name="Enter">Enter Game</string>
     <string name="Menu_title">Main Menu</string>

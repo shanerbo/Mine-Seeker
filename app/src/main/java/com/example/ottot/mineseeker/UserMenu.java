@@ -33,7 +33,8 @@ public class UserMenu extends AppCompatActivity {//this is the actual main activ
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_menu);
-
+        Intent welcome = MainActivity.makeIntent(UserMenu.this);
+        startActivity(welcome);
         //initialize table data with default values
         TimePlayed=0;
         BestScores[dim_code]=0;
